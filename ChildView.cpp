@@ -36,6 +36,8 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_COMMAND(IDM_FONT_NEXT, OnFontNext)
 	ON_UPDATE_COMMAND_UI(IDM_FONT_NEXT, OnUpdateFontNext)
 	ON_COMMAND(IDM_MENU_INPUTSTRING, OnMenuInputstring)
+	ON_WM_LBUTTONUP()
+	ON_WM_RBUTTONUP()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -171,7 +173,7 @@ void CChildView::SetTheString(LPCWSTR lpszString)
 void CChildView::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {
 	CWnd ::OnLButtonDblClk(nFlags, point);
-
+/***
 	CInputDialog dlg;
 	if( IDOK!=dlg.DoModal() )
 		return;
@@ -181,6 +183,8 @@ void CChildView::OnLButtonDblClk(UINT nFlags, CPoint point)
 	ASSERT(0);
 #endif
 	InvalidateRect(NULL);
+
+***/
 }
 
 int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct) 
@@ -224,7 +228,9 @@ void CChildView::OnFontPrev()
 	if( m_strTheString.length() <= m_nCurIndex )
 		return;
 
-	ASSERT(m_nCurIndex!=0);
+	if(m_nCurIndex==0)
+		return;
+
 	if( m_nCurIndex >= 2 )
 	{	
 //		TRACE(CString(m_strTheString[m_nCurIndex-2])+_T('\n'));
@@ -317,3 +323,15 @@ void CChildView::OnMenuInputstring()
 	InvalidateRect(NULL);
 }
 
+
+void CChildView::OnLButtonUp(UINT nFlags, CPoint point) 
+{
+	OnFontNext();
+	CWnd ::OnLButtonUp(nFlags, point);
+}
+
+void CChildView::OnRButtonUp(UINT nFlags, CPoint point) 
+{
+	OnFontPrev();
+	CWnd ::OnRButtonUp(nFlags, point);
+}

@@ -57,7 +57,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 /nologo /subsystem:windows /machine:I386 /out:"C:\Program Files\larmoji\larmoji.exe"
+# ADD LINK32 /nologo /subsystem:windows /machine:I386 /out:"C:\LinkOut\larmoji\larmoji.exe"
 
 !ELSEIF  "$(CFG)" == "larmoji - Win32 Debug"
 
@@ -83,7 +83,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /out:"C:\Program Files\larmoji\larmoji.exe" /pdbtype:sept
+# ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /out:"C:\LinkOut\larmoji\larmoji.exe" /pdbtype:sept
 
 !ELSEIF  "$(CFG)" == "larmoji - Win32 Release Unicode"
 
@@ -109,7 +109,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /machine:I386 /out:"C:\Program Files\larmoji\larmoji.exe"
+# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /machine:I386 /out:"C:\LinkOut\larmoji\larmoji.exe"
 
 !ELSEIF  "$(CFG)" == "larmoji - Win32 Debug Unicode"
 
@@ -136,7 +136,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /debug /machine:I386 /out:"C:\Program Files\larmoji\larmoji.exe" /pdbtype:sept
+# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /debug /machine:I386 /out:"C:\LinkOut\larmoji\larmoji.exe" /pdbtype:sept
 
 !ELSEIF  "$(CFG)" == "larmoji - Win32 Release UnicodeEnglish"
 
@@ -163,7 +163,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /machine:I386 /out:"C:\Program Files\larmoji\larmoji.exe"
-# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /machine:I386 /out:"C:\Program Files\larmoji_english\larmoji.exe"
+# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /machine:I386 /out:"C:\LinkOut\larmoji_english\larmoji.exe"
 
 !ELSEIF  "$(CFG)" == "larmoji - Win32 Debug UnicodeEnglish"
 
@@ -190,7 +190,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /debug /machine:I386 /out:"C:\Program Files\larmoji\larmoji.exe" /pdbtype:sept
-# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /debug /machine:I386 /out:"C:\Program Files\larmoji_english\larmoji.exe" /pdbtype:sept
+# ADD LINK32 /nologo /entry:"wWinMainCRTStartup" /subsystem:windows /debug /machine:I386 /out:"C:\LinkOut\larmoji_english\larmoji.exe" /pdbtype:sept
 
 !ENDIF 
 
