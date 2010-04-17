@@ -57,8 +57,8 @@ protected:
 	afx_msg void OnFontNext();
 	afx_msg void OnUpdateFontNext(CCmdUI* pCmdUI);
 	afx_msg void OnMenuInputstring();
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

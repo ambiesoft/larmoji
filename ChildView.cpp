@@ -36,8 +36,8 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_COMMAND(IDM_FONT_NEXT, OnFontNext)
 	ON_UPDATE_COMMAND_UI(IDM_FONT_NEXT, OnUpdateFontNext)
 	ON_COMMAND(IDM_MENU_INPUTSTRING, OnMenuInputstring)
-	ON_WM_LBUTTONUP()
-	ON_WM_RBUTTONUP()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_RBUTTONDOWN()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -324,14 +324,16 @@ void CChildView::OnMenuInputstring()
 }
 
 
-void CChildView::OnLButtonUp(UINT nFlags, CPoint point) 
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point) 
 {
 	OnFontNext();
-	CWnd ::OnLButtonUp(nFlags, point);
+	CWnd ::OnLButtonDown(nFlags, point);
 }
 
-void CChildView::OnRButtonUp(UINT nFlags, CPoint point) 
+void CChildView::OnRButtonDown(UINT nFlags, CPoint point) 
 {
 	OnFontPrev();
-	CWnd ::OnRButtonUp(nFlags, point);
+	CWnd ::OnRButtonDown(nFlags, point);
 }
+
+
