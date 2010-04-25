@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_COMMAND(IDM_MENU_INPUTSTRING, OnMenuInputstring)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
+	ON_WM_MOUSEACTIVATE()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -337,3 +338,9 @@ void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
 }
 
 
+
+int CChildView::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message) 
+{
+	TRACE(_T("%d %d\n"), nHitTest, message);
+	return CWnd ::OnMouseActivate(pDesktopWnd, nHitTest, message);
+}
