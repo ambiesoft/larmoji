@@ -72,8 +72,6 @@ protected:
 	afx_msg void OnDestroy();
 	afx_msg void OnEditPaste();
 	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
-	afx_msg void OnEditCopy();
-	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
 	afx_msg void OnChangeCbChain(HWND hWndRemove, HWND hWndAfter);
 	afx_msg void OnDrawClipboard();
 	afx_msg void OnWindowAlwaystop();

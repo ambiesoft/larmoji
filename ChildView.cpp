@@ -39,6 +39,9 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEACTIVATE()
+	ON_WM_MBUTTONUP()
+	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -343,4 +346,50 @@ int CChildView::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message)
 {
 	TRACE(_T("%d %d\n"), nHitTest, message);
 	return CWnd ::OnMouseActivate(pDesktopWnd, nHitTest, message);
+}
+
+void CChildView::OnMButtonUp(UINT nFlags, CPoint point) 
+{
+	OnEditCopy();
+	
+	CWnd ::OnMButtonUp(nFlags, point);
+}
+
+void CChildView::OnEditCopy() 
+{
+	TCHAR c = GetCurChar();
+
+	HGLOBAL h = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, 2*sizeof(TCHAR));
+	HGLOBAL h2 = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, 4);
+
+	LPWSTR p = (LPWSTR)GlobalLock(h);
+	LPWSTR p2 = (LPWSTR)GlobalLock(h2);
+//	lstrcpyW(p, str.c_str());
+	p[0] = c;
+	p[1] = 0;
+	p2[0]=0;
+	if( OpenClipboard() )
+	{
+		if( EmptyClipboard() )
+		{
+			SetClipboardData(theApp.CF_LARMOJIIGNORE, h2);
+			SetClipboardData(CF_UNICODETEXT,h);
+		}
+		theApp.m_bCopying = TRUE;
+		CloseClipboard();
+		theApp.m_bCopying = FALSE;
+		GlobalUnlock(h);
+		GlobalUnlock(h2);
+
+	}
+	else
+	{
+		GlobalFree(h);
+		GlobalFree(h2);
+	}
+}
+
+void CChildView::OnUpdateEditCopy(CCmdUI* pCmdUI) 
+{
+	pCmdUI->Enable(m_strTheString.length() != 0);
 }

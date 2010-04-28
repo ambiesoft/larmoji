@@ -24,6 +24,7 @@ class CLarmojiApp : public CWinApp
 public:
 	CLarmojiApp();
 	BOOL m_bCopying;
+	UINT CF_LARMOJIIGNORE;
 // オーバーライド
 	// ClassWizard は仮想関数のオーバーライドを生成します。
 	//{{AFX_VIRTUAL(CLarmojiApp)

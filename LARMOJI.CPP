@@ -74,6 +74,8 @@ BOOL CLarmojiApp::InitInstance()
 	// メイン ウインドウを作成するとき、このコードは新しいフレーム ウインドウ オブジェクトを作成し、
 	// それをアプリケーションのメイン ウインドウにセットします
 
+	CF_LARMOJIIGNORE = RegisterClipboardFormat(_T("CLIPBOARDFORMAT_LARMOJI_IGNORE"));
+
 	CMainFrame* pFrame = new CMainFrame;
 	m_pMainWnd = pFrame;
 

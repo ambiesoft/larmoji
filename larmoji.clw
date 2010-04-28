@@ -40,13 +40,14 @@ ImplementationFile=ChildView.cpp
 Filter=W
 BaseClass=CWnd 
 VirtualFilter=WC
+LastObject=ID_EDIT_COPY
 
 [CLS:CMainFrame]
 Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=W
-LastObject=IDM_MENU_INPUTSTRING
+LastObject=ID_EDIT_PASTE
 BaseClass=CFrameWnd
 VirtualFilter=fWC
 
@@ -73,16 +74,17 @@ Type=1
 Class=CMainFrame
 Command1=ID_FILE_NEW
 Command2=ID_APP_EXIT
-Command3=ID_EDIT_PASTE
-Command4=IDM_MENU_INPUTSTRING
-Command5=IDM_FONT_NEXT
-Command6=IDM_FONT_PREV
-Command7=ID_VIEW_TOOLBAR
-Command8=ID_VIEW_STATUS_BAR
-Command9=IDM_WATCH_CLIPBOARD
-Command10=IDM_WINDOW_ALWAYSTOP
-Command11=ID_APP_ABOUT
-CommandCount=11
+Command3=ID_EDIT_COPY
+Command4=ID_EDIT_PASTE
+Command5=IDM_MENU_INPUTSTRING
+Command6=IDM_FONT_NEXT
+Command7=IDM_FONT_PREV
+Command8=ID_VIEW_TOOLBAR
+Command9=ID_VIEW_STATUS_BAR
+Command10=IDM_WATCH_CLIPBOARD
+Command11=IDM_WINDOW_ALWAYSTOP
+Command12=ID_APP_ABOUT
+CommandCount=12
 
 [ACL:IDR_MAINFRAME]
 Type=1

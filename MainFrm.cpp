@@ -27,8 +27,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_DESTROY()
 	ON_COMMAND(ID_EDIT_PASTE, OnEditPaste)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_PASTE, OnUpdateEditPaste)
-	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
 	ON_WM_CHANGECBCHAIN()
 	ON_WM_DRAWCLIPBOARD()
 	ON_COMMAND(IDM_WINDOW_ALWAYSTOP, OnWindowAlwaystop)
@@ -249,11 +247,22 @@ void CMainFrame::OnEditPaste()
 	if( !OpenClipboard() )
 		return;
 
+	struct stCPCloser {
+		~stCPCloser() {
+			::CloseClipboard();
+		}
+	} stcpcloser;
+
+	if ( ::IsClipboardFormatAvailable(theApp.CF_LARMOJIIGNORE) )
+	{
+		return;
+	}
+
 	HANDLE h = ::GetClipboardData(CF_UNICODETEXT);
 
 	m_wndView.SetTheString( (LPCWSTR)GlobalLock(h) );
 	GlobalUnlock(h);
-	::CloseClipboard();
+
 }
 
 void CMainFrame::OnUpdateEditPaste(CCmdUI* pCmdUI) 
@@ -262,36 +271,8 @@ void CMainFrame::OnUpdateEditPaste(CCmdUI* pCmdUI)
 	pCmdUI->Enable(::IsClipboardFormatAvailable(CF_UNICODETEXT));
 }
 
-void CMainFrame::OnEditCopy() 
-{
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-/**
-	wstring str = m_wndView.GetTheString();
-	ASSERT(str.length()!=0);
-	HGLOBAL h = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, (str.length()+1)*2);
-	LPWSTR p = (LPWSTR)GlobalLock(h);
-	lstrcpyW(p, str.c_str());
-	if( OpenClipboard() )
-	{
-		if( EmptyClipboard() )
-		{
-			SetClipboardData(CF_UNICODETEXT,h);
-		}
-		theApp.m_bCopying = TRUE;
-		CloseClipboard();
-		theApp.m_bCopying = FALSE;
-		GlobalUnlock(h);
-	}
-	else
-		GlobalFree(h);
-**/
-}
 
-void CMainFrame::OnUpdateEditCopy(CCmdUI* pCmdUI) 
-{
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
-	pCmdUI->Enable(lstrlenW(m_wndView.GetTheString()) != 0);	
-}
+
 
 void CMainFrame::OnChangeCbChain(HWND hWndRemove, HWND hWndAfter) 
 {

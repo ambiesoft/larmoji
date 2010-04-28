@@ -42,7 +42,11 @@ public:
 	{
 		return m_strTheString.c_str();
 	}
-
+	TCHAR GetCurChar() const {
+		if ( m_strTheString.length() == 0 )
+			return 0;
+		return m_strTheString[m_nCurIndex];
+	}
 	virtual ~CChildView();
 
 
@@ -60,6 +64,9 @@ protected:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
+	afx_msg void OnMButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnEditCopy();
+	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
