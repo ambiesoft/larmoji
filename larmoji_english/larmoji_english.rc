@@ -120,6 +120,7 @@ BEGIN
     END
     POPUP "&Edit"
     BEGIN
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_PASTE
         MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
         MENUITEM SEPARATOR
         MENUITEM "&Input Strings...\tCtrl+I",   IDM_MENU_INPUTSTRING
