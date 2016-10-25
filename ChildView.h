@@ -36,7 +36,7 @@ public:
 	int GetCurLen() const {
 		return m_nCurLen;
 	}
-	BOOL SetCodeString(LPTSTR szCode);
+	CString GetCodeString();
 	void SetTheString(LPCWSTR lpszString);
 	LPCWSTR GetTheString() const 
 	{

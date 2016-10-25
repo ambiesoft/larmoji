@@ -62,6 +62,10 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
+	CString curFontName = ((CMainFrame*)theApp.m_pMainWnd)->GetCurFontName();
+	if (curFontName.IsEmpty())
+		return;
+
 	CPaintDC dc(this); // 描画用のデバイス コンテキスト
 	
 	if( m_strTheString.length()==0 )
@@ -92,7 +96,7 @@ void CChildView::OnPaint()
 	lf.lfCharSet = 0;//GB2312_CHARSET;
 	lf.lfPitchAndFamily = FF_MODERN;
 
-	lstrcpy(lf.lfFaceName, ((CMainFrame*)theApp.m_pMainWnd)->GetCurFontName());
+	lstrcpy(lf.lfFaceName, curFontName);
 	font.CreateFontIndirect(&lf);
 	CFont* pOldFont = dc.SelectObject(&font);
 
@@ -200,7 +204,7 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-BOOL CChildView::SetCodeString(LPTSTR szCode)
+CString CChildView::GetCodeString()
 {
 /**
 	if( m_strTheString.IsEmpty() )
@@ -221,9 +225,13 @@ BOOL CChildView::SetCodeString(LPTSTR szCode)
 	}
 **/
 
-	_stprintf(szCode, _T(" 0x%04x"),
-		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex])    ;
-	return TRUE;
+	CString strRet;
+	strRet.Format(_T(" 0x%04x"),
+		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex]);
+//	_stprintf(szCode, _T(" 0x%04x"),
+//		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex]);
+
+	return strRet;
 }
 
 void CChildView::OnFontPrev() 

@@ -36,9 +36,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(IDM_FONT_ITALIC, OnFontItalic)
 	ON_UPDATE_COMMAND_UI(IDM_FONT_ITALIC, OnUpdateFontItalic)
 	//}}AFX_MSG_MAP
-	ON_UPDATE_COMMAND_UI(ID_INDICATOR_SJISCODE, OnUpdateCode)
-//	ON_UPDATE_COMMAND_UI(ID_INDICATOR_DBCSINDEX, OnUpdateDBCSIndex)
-	ON_UPDATE_COMMAND_UI(ID_INDICATOR_DBCSINDEX, OnUpdateIndex)
+	ON_UPDATE_COMMAND_UI(ID_INDICATOR_UNICODE, OnUpdateCode)
+	ON_UPDATE_COMMAND_UI(ID_INDICATOR_INDEX, OnUpdateIndex)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -47,8 +46,8 @@ static UINT indicators[] =
 //	ID_INDICATOR_KANA,
 //	ID_INDICATOR_CAPS,
 //	ID_INDICATOR_NUM,
-	ID_INDICATOR_DBCSINDEX,
-	ID_INDICATOR_SJISCODE,
+	ID_INDICATOR_INDEX,
+	ID_INDICATOR_UNICODE,
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -129,7 +128,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("Failed to create status bar\n");
 		return -1;      // 作成に失敗
 	}
-
+	else
+	{
+		UINT nID = 0;
+		UINT nStyle = 0;
+		int cxWidth = 0;
+		m_wndStatusBar.GetPaneInfo(0, nID, nStyle, cxWidth);
+		m_wndStatusBar.SetPaneInfo(0, nID, nStyle, cxWidth / 3);
+	}
 	// TODO: ツール バーをドッキング可能にしない場合は以下の３行を削除
 	//       してください。
 	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
@@ -149,6 +155,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: この位置で CREATESTRUCT cs を修正して、Window クラスやスタイルを
 	//       修正してください。
 
+	cs.style &= ~WS_VISIBLE;
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
 	if( m_nFlags & APPFLAGS_ALWAYSTOP )
 		cs.dwExStyle |= WS_EX_TOPMOST;
@@ -396,6 +403,9 @@ BOOL CMainFrame::InitCombobox()
 	m_wndToolBar.m_wndFontName.SetCurSel(nLastSel);
 	
 	ReleaseDC(pDC);
+
+	Invalidate();
+	UpdateWindow();
 	return TRUE;
 }
 
@@ -404,7 +414,8 @@ CString CMainFrame::GetCurFontName()
 	CString strRet;
 	
 	int nCurSel = m_wndToolBar.m_wndFontName.GetCurSel();
-	ASSERT(nCurSel != CB_ERR );
+	if (nCurSel == CB_ERR)
+		return strRet;
 	
 	COMBOBOXEXITEM item = {0};
 	item.iItem = nCurSel;
@@ -419,9 +430,7 @@ CString CMainFrame::GetCurFontName()
 
 void CMainFrame::OnUpdateCode(CCmdUI* pCmdUI)
 {
-	static TCHAR szCode[32];
-	m_wndView.SetCodeString(szCode);
-	pCmdUI->SetText(szCode);
+	pCmdUI->SetText(m_wndView.GetCodeString());
 }
 
 /**
