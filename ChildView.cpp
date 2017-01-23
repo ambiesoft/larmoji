@@ -226,10 +226,9 @@ CString CChildView::GetCodeString()
 **/
 
 	CString strRet;
-	strRet.Format(_T(" 0x%04x"),
-		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex]);
-//	_stprintf(szCode, _T(" 0x%04x"),
-//		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex]);
+	strRet.Format(_T(" 0x%04X=%d"),
+		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex],
+		(UINT)m_strTheString[m_nCurIndex]);
 
 	return strRet;
 }

@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Japanese (Japan) resources
+// 日本語 (日本) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
@@ -360,7 +360,7 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_INDICATOR_UNICODE    "0XXXXX"
+    ID_INDICATOR_UNICODE    "0XXXXX=000000"
     ID_INDICATOR_MAIN       "レディ"
 END
 
@@ -369,7 +369,7 @@ BEGIN
     ID_FILE_NEW             "新しいウインドウを開きます。\n新規作成"
 END
 
-#endif    // Japanese (Japan) resources
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -390,7 +390,7 @@ LANGUAGE 17, 1
 #pragma code_page(932)
 #endif //_WIN32
 #include "res\larmoji.rc2"  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\?[?X
-#include "l.jpn\afxres.rc"          // ?W???I?R?“?|?[?l?“?g
+#include "l.jpn\afxres.rc"          // ?W???I?R??g?|?[?l??g?g
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
