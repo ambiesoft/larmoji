@@ -43,6 +43,7 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
 	//}}AFX_MSG_MAP
+	ON_WM_MOUSEWHEEL()
 END_MESSAGE_MAP()
 
 
@@ -66,14 +67,14 @@ void CChildView::OnPaint()
 	if (curFontName.IsEmpty())
 		return;
 
-	CPaintDC dc(this); // 描画用のデバイス コンテキスト
+	CPaintDC dc(this);
 	
 	if( m_strTheString.length()==0 )
 	{
 		dc.TextOut(0,0,m_strTheString.c_str());
 		return;
 	}
-	// TODO: メッセージ ハンドラのコードをここに追加してください。
+
 //	dc.SetMapMode(MM_TEXT);
 	CFont font;
 	CRect r;
@@ -175,6 +176,10 @@ void CChildView::SetTheString(LPCWSTR lpszString)
 //	}
 	m_nCurLen = m_strTheString.length();
 	InvalidateRect(NULL);
+
+	CString strTitle;
+	strTitle.Format(L"%s | %s", m_strTheString.c_str(), AfxGetAppName());
+	AfxGetMainWnd()->SetWindowText(strTitle);
 }
 
 
@@ -235,7 +240,6 @@ CString CChildView::GetCodeString()
 
 void CChildView::OnFontPrev() 
 {
-	// TODO: この位置にコマンド　 ハンドラ用のコードを追加してください
 	if( m_strTheString.length() <= m_nCurIndex )
 		return;
 
@@ -279,13 +283,11 @@ void CChildView::OnFontPrev()
 
 void CChildView::OnUpdateFontPrev(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->Enable(m_nCurIndex!=0);	
 }
 
 void CChildView::OnFontNext() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	if( m_strTheString.length() <= (m_nCurIndex+1) )
 		return;
 
@@ -302,7 +304,6 @@ void CChildView::OnFontNext()
 
 void CChildView::OnUpdateFontNext(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	if( m_strTheString.length()==0 )
 	{
 		pCmdUI->Enable(FALSE);
@@ -322,7 +323,6 @@ void CChildView::OnUpdateFontNext(CCmdUI* pCmdUI)
 
 void CChildView::OnMenuInputstring() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	CInputDialog dlg;
 	if( IDOK!=dlg.DoModal() )
 		return;
@@ -399,4 +399,15 @@ void CChildView::OnEditCopy()
 void CChildView::OnUpdateEditCopy(CCmdUI* pCmdUI) 
 {
 	pCmdUI->Enable(m_strTheString.length() != 0);
+}
+
+
+BOOL CChildView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+	if (zDelta < 0)
+		OnFontNext();
+	else
+		OnFontPrev();
+
+	return CWnd::OnMouseWheel(nFlags, zDelta, pt);
 }

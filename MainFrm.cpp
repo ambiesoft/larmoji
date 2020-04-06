@@ -42,7 +42,7 @@ END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
-	ID_SEPARATOR,           // ステータス ライン インジケータ
+	ID_SEPARATOR,
 //	ID_INDICATOR_KANA,
 //	ID_INDICATOR_CAPS,
 //	ID_INDICATOR_NUM,
@@ -50,12 +50,9 @@ static UINT indicators[] =
 	ID_INDICATOR_UNICODE,
 };
 
-/////////////////////////////////////////////////////////////////////////////
-// CMainFrame クラスの構築/消滅
 
 CMainFrame::CMainFrame()
 {
-	// TODO: この位置にメンバの初期化処理コードを追加してください。
 	m_nFlags = (UINT)theApp.GetProfileInt(STR_SECTION_SETTING, STR_SECKEY_FLAGS, 0);
 	m_hNextWnd = NULL;
 }
@@ -73,7 +70,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	SetIcon(hIcon, TRUE);
 	SetIcon(hIcon, FALSE);
 
-	// フレームのクライアント領域全体を占めるビューを作成します。
 	if (!m_wndView.Create(NULL, NULL, AFX_WS_DEFAULT_VIEW,
 		CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
 	{
@@ -86,7 +82,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");
-		return -1;      // 作成に失敗
+		return -1;
 	}
 
 	int nWatchCBIndex = m_wndToolBar.CommandToIndex(IDM_WATCH_CLIPBOARD);
@@ -126,7 +122,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		  sizeof(indicators)/sizeof(UINT)))
 	{
 		TRACE0("Failed to create status bar\n");
-		return -1;      // 作成に失敗
+		return -1;
 	}
 	else
 	{
@@ -136,8 +132,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		m_wndStatusBar.GetPaneInfo(0, nID, nStyle, cxWidth);
 		m_wndStatusBar.SetPaneInfo(0, nID, nStyle, cxWidth / 3);
 	}
-	// TODO: ツール バーをドッキング可能にしない場合は以下の３行を削除
-	//       してください。
+
 	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
@@ -152,8 +147,6 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	if( !CFrameWnd::PreCreateWindow(cs) )
 		return FALSE;
-	// TODO: この位置で CREATESTRUCT cs を修正して、Window クラスやスタイルを
-	//       修正してください。
 
 	cs.style &= ~WS_VISIBLE;
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
@@ -163,8 +156,6 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	return TRUE;
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// CMainFrame クラスの診断
 
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
@@ -179,29 +170,23 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 #endif //_DEBUG
 
-/////////////////////////////////////////////////////////////////////////////
-// CMainFrame メッセージ ハンドラ
 void CMainFrame::OnSetFocus(CWnd* pOldWnd)
 {
-	// ビュー ウィンドウにフォーカスを与えます。
 	UNREFERENCED_PARAMETER(pOldWnd);
 	m_wndView.SetFocus();
 }
 
 BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 {
-	// ビューに最初にコマンドを処理する機会を与えます。
 	if (m_wndView.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
 		return TRUE;
 
-	// 処理されなかった場合にはデフォルトの処理を行います。
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
 
 void CMainFrame::OnWatchClipboard() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	m_nFlags ^= APPFLAGS_WATCHCB;
 	if( m_nFlags & APPFLAGS_WATCHCB )
 	{
@@ -217,7 +202,6 @@ void CMainFrame::OnWatchClipboard()
 
 void CMainFrame::OnUpdateWatchClipboard(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->SetCheck( (m_nFlags & APPFLAGS_WATCHCB) != 0 );
 	pCmdUI->Enable();
 }
@@ -247,7 +231,6 @@ void CMainFrame::OnDestroy()
 
 void CMainFrame::OnEditPaste() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	if( !::IsClipboardFormatAvailable(CF_UNICODETEXT) )
 		return;
 
@@ -274,7 +257,6 @@ void CMainFrame::OnEditPaste()
 
 void CMainFrame::OnUpdateEditPaste(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->Enable(::IsClipboardFormatAvailable(CF_UNICODETEXT));
 }
 
@@ -285,7 +267,6 @@ void CMainFrame::OnChangeCbChain(HWND hWndRemove, HWND hWndAfter)
 {
 	CFrameWnd::OnChangeCbChain(hWndRemove, hWndAfter);
 	
-	// TODO: この位置にメッセージ ハンドラ用のコードを追加してください
 	ASSERT(m_nFlags & APPFLAGS_WATCHCB);
 	if(m_hNextWnd == hWndRemove)
 	{
@@ -302,7 +283,6 @@ void CMainFrame::OnDrawClipboard()
 {
 	CFrameWnd::OnDrawClipboard();
 	
-	// TODO: この位置にメッセージ ハンドラ用のコードを追加してください
 	ASSERT(m_nFlags & APPFLAGS_WATCHCB);
 
 	if( !theApp.m_bCopying )
@@ -316,7 +296,6 @@ void CMainFrame::OnDrawClipboard()
 
 void CMainFrame::OnWindowAlwaystop() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	m_nFlags ^= APPFLAGS_ALWAYSTOP;
 	
 	SetWindowPos( (m_nFlags & APPFLAGS_ALWAYSTOP) ? &wndTopMost: &wndNoTopMost,
@@ -325,7 +304,6 @@ void CMainFrame::OnWindowAlwaystop()
 
 void CMainFrame::OnUpdateWindowAlwaystop(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->SetCheck( (m_nFlags & APPFLAGS_ALWAYSTOP) != 0 );
 }
 
@@ -457,32 +435,23 @@ void CMainFrame::OnUpdateIndex(CCmdUI* pCmdUI)
 
 void CMainFrame::OnFontBold() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	m_nFlags ^= APPFLAGS_BOLD;
 	m_wndView.InvalidateRect(NULL);
 }
 
 void CMainFrame::OnUpdateFontBold(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->SetCheck( (m_nFlags & APPFLAGS_BOLD) ? 1 : 0 );
 }
 
 void CMainFrame::OnFontItalic() 
 {
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
 	m_nFlags ^= APPFLAGS_ITALIC;
 	m_wndView.InvalidateRect(NULL);
 }
 
 void CMainFrame::OnUpdateFontItalic(CCmdUI* pCmdUI) 
 {
-	// TODO: この位置に command update UI ハンドラ用のコードを追加してください
 	pCmdUI->SetCheck( (m_nFlags & APPFLAGS_ITALIC) ? 1 : 0 );
 }
 
-//DEL void CMainFrame::OnMenuInputstring() 
-//DEL {
-//DEL 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-//DEL 	
-//DEL }
