@@ -45,13 +45,13 @@
     <ClCompile Include="StdAfx.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\lsMisc\I18N.cpp">
+    <ClCompile Include="..\..\lsMisc\I18N.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\lsMisc\UrlEncode.cpp">
+    <ClCompile Include="..\..\lsMisc\UrlEncode.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\lsMisc\UTF16toUTF8.cpp">
+    <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,13 +83,13 @@
     <ClInclude Include="StdAfx.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\lsMisc\I18N.h">
+    <ClInclude Include="..\..\lsMisc\I18N.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\lsMisc\UrlEncode.h">
+    <ClInclude Include="..\..\lsMisc\UrlEncode.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\lsMisc\UTF16toUTF8.h">
+    <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

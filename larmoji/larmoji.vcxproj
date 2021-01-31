@@ -20,7 +20,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -44,9 +44,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\$(PlatformToolset)\$(ProjectName)\$(PlatformTarget)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\$(PlatformToolset)\$(ProjectName)\$(PlatformTarget)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,8 +85,8 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir "$(TargetDir)lang\"
-copy "$(ProjectDir)lang\jpn.txt" "$(TargetDir)lang\"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,14 +125,14 @@ copy "$(ProjectDir)lang\jpn.txt" "$(TargetDir)lang\"</Command>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir "$(TargetDir)lang\"
-copy "$(ProjectDir)lang\jpn.txt" "$(TargetDir)lang\"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lsMisc\I18N.cpp" />
-    <ClCompile Include="..\lsMisc\UrlEncode.cpp" />
-    <ClCompile Include="..\lsMisc\UTF16toUTF8.cpp" />
+    <ClCompile Include="..\..\lsMisc\I18N.cpp" />
+    <ClCompile Include="..\..\lsMisc\UrlEncode.cpp" />
+    <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="FontNameComboBox.cpp" />
     <ClCompile Include="InputDialog.cpp" />
@@ -149,9 +151,9 @@ copy "$(ProjectDir)lang\jpn.txt" "$(TargetDir)lang\"</Command>
     <ResourceCompile Include="larmoji.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lsMisc\I18N.h" />
-    <ClInclude Include="..\lsMisc\UrlEncode.h" />
-    <ClInclude Include="..\lsMisc\UTF16toUTF8.h" />
+    <ClInclude Include="..\..\lsMisc\I18N.h" />
+    <ClInclude Include="..\..\lsMisc\UrlEncode.h" />
+    <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="FontNameComboBox.h" />
     <ClInclude Include="InputDialog.h" />

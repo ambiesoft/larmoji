@@ -3,8 +3,6 @@
 
 #include "stdafx.h"
 
-#include "../lsMisc/I18N.h"
-
 #include "larmoji.h"
 
 #include "MainFrm.h"

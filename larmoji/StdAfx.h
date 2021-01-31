@@ -26,4 +26,7 @@ using namespace std;
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
 
+#include "../../lsMisc/I18N.h"
+using namespace Ambiesoft;
+
 #endif // !defined(AFX_STDAFX_H__D5783068_745A_11D5_8E03_A40A1FE48159__INCLUDED_)
