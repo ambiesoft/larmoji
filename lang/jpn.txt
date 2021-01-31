@@ -1,0 +1,22 @@
+"&File"="ファイル(&F)"
+"&New"="新規作成(&N)"
+"E&xit"="アプリケーションの終了(&X)"
+
+"&Edit"="編集(&E)"
+"&Copy"="コピー(&C)"
+"&Paste"="貼り付け(&P)"
+"&Input String..."="文字列の入力(&I)..."
+"&Next Character"="次の文字(&N)"
+"Pre&vious Character"="前の文字(&V)"
+"&View"="表示(&V)"
+"&Tool Bar"="ツールバー(&T)"
+"&Status Bar"="ステータスバー(&S)"
+"&Monitor Clipboard"="クリップボード監視(&M)"
+"&Always Topmost"="常に最上位に表示(&A)
+"&Help"="ヘルプ(&H)"
+"&About..."="情報(&A)..."
+
+"Ready"="準備完了"
+"Monitor Clipboard"="クリップボード監視"
+
+"Open New Window"="新しいウインドウを開きます"

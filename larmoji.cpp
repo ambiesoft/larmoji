@@ -1,5 +1,8 @@
 
 #include "stdafx.h"
+
+#include "../lsMisc/I18N.h"
+
 #include "larmoji.h"
 
 #include "MainFrm.h"
@@ -10,6 +13,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace Ambiesoft;
 
 /////////////////////////////////////////////////////////////////////////////
 // CLarmojiApp
@@ -32,11 +36,7 @@ CLarmojiApp theApp;
 
 BOOL CLarmojiApp::InitInstance()
 {
-#ifdef LANGUAGE_ENGLISH
-	HINSTANCE hResource = ::LoadLibrary(_T("larmoji_english.dll"));
-	if (hResource != NULL)
-		AfxSetResourceHandle(hResource);
-#endif
+	i18nInitLangmap();
 
 #ifdef _AFXDLL
 	// Enable3dControls();
@@ -65,6 +65,9 @@ BOOL CLarmojiApp::InitInstance()
 	pFrame->LoadFrame(IDR_MAINFRAME,
 		WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, NULL, 
 		NULL);
+
+	ASSERT(::IsMenu(*pFrame->GetMenu()));
+	i18nChangeMenuText(*pFrame->GetMenu());
 
 	WINDOWPLACEMENT wp = {0};
 	if( GetPrivateProfileStruct(STR_SECTION_SETTING, STR_SECKEY_WP, &wp, sizeof(wp),
@@ -114,6 +117,7 @@ protected:
 		// 
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
 };
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
@@ -150,3 +154,5 @@ void CLarmojiApp::OnFileNew()
 
 	ShellExecute(*m_pMainWnd, NULL, szT, NULL, NULL, SW_SHOW);
 }
+
+

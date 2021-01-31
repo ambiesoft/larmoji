@@ -16,6 +16,9 @@
     <Filter Include="04 dist">
       <UniqueIdentifier>{a1ddc9ed-49cc-416f-bd34-14c4e75c5f0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05 lang">
+      <UniqueIdentifier>{e87eca37-473b-4777-b74c-9dcba34a7850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChildView.cpp">
@@ -40,6 +43,15 @@
       <Filter>02 Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StdAfx.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lsMisc\I18N.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lsMisc\UrlEncode.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lsMisc\UTF16toUTF8.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,6 +83,15 @@
     <ClInclude Include="StdAfx.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\lsMisc\I18N.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lsMisc\UrlEncode.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lsMisc\UTF16toUTF8.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\larmoji.ico">
@@ -93,6 +114,9 @@
   <ItemGroup>
     <Text Include="history.txt">
       <Filter>04 dist</Filter>
+    </Text>
+    <Text Include="lang\jpn.txt">
+      <Filter>05 lang</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ public:
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 	//}}AFX_VIRTUAL
 
+	virtual void GetMessageString(UINT nID, CString& rMessage) const override;
 // インプリメンテーション
 public:
 	CString GetCurFontName();
@@ -84,6 +85,7 @@ protected:
 	afx_msg void OnUpdateCode(CCmdUI* pCmdUI);
 //	afx_msg void OnUpdateDBCSIndex(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateIndex(CCmdUI* pCmdUI);
+	afx_msg BOOL OnToolTipText(UINT nID, NMHDR* pNMHDR, LRESULT* pResult);
 	DECLARE_MESSAGE_MAP()
 };
 

@@ -13,49 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Japanese (Japan) resources
+// ニュートラル (既定) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
-LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
+LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
 #pragma code_page(932)
-
-#ifdef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// TEXTINCLUDE
-//
-
-1 TEXTINCLUDE 
-BEGIN
-    "resource.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
-    "#include ""afxres.h""\r\n"
-    "\0"
-END
-
-3 TEXTINCLUDE 
-BEGIN
-    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
-    "#define _AFX_NO_OLE_RESOURCES\r\n"
-    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
-    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
-    "\r\n"
-    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
-    "#ifdef _WIN32\r\n"
-    "LANGUAGE 17, 1\r\n"
-    "#pragma code_page(932)\r\n"
-    "#endif //_WIN32\r\n"
-    "#include ""res\\larmoji.rc2""  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\\?[?X\r\n"
-    "#include ""l.jpn\\afxres.rc""          // ?W???I?R??g?|?[?l??g?g\r\n"
-    "#endif\r\n"
-    "\0"
-END
-
-#endif    // APSTUDIO_INVOKED
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -69,67 +31,38 @@ IDR_MAINFRAME           ICON                    "res\\larmoji.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Bitmap
-//
-
-IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Toolbar
-//
-
-IDR_MAINFRAME TOOLBAR 16, 15
-BEGIN
-    BUTTON      ID_FILE_NEW
-    SEPARATOR
-    BUTTON      ID_EDIT_PASTE
-    BUTTON      IDM_WATCH_CLIPBOARD
-    BUTTON      IDM_WINDOW_ALWAYSTOP
-    SEPARATOR
-    BUTTON      IDP_FONTNAME
-    SEPARATOR
-    BUTTON      IDM_FONT_PREV
-    BUTTON      IDM_FONT_NEXT
-    BUTTON      IDM_MENU_INPUTSTRING
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Menu
 //
 
 IDR_MAINFRAME MENU
 BEGIN
-    POPUP "ファイル(&F)"
+    POPUP "&File"
     BEGIN
-        MENUITEM "新規作成(&N)",                    ID_FILE_NEW
+        MENUITEM "&New",                        ID_FILE_NEW
         MENUITEM SEPARATOR
-        MENUITEM "アプリケーションの終了(&X)",             ID_APP_EXIT
+        MENUITEM "E&xit",                       ID_APP_EXIT
     END
-    POPUP "編集(&E)"
+    POPUP "&Edit"
     BEGIN
-        MENUITEM "コピー(&C)\tCtrl+C",             ID_EDIT_COPY
-        MENUITEM "貼り付け(&P)\tCtrl+V",            ID_EDIT_PASTE
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
         MENUITEM SEPARATOR
-        MENUITEM "文字列の入力(&I)...\tCtrl+I",       IDM_MENU_INPUTSTRING
+        MENUITEM "&Input String...\tCtrl+I",    IDM_MENU_INPUTSTRING
         MENUITEM SEPARATOR
-        MENUITEM "次の文字(&V)\tSPACE",             IDM_FONT_NEXT
-        MENUITEM "前の文字(&V)\tSHIFT+SPACE",       IDM_FONT_PREV
+        MENUITEM "&Next Character\tSPACE",      IDM_FONT_NEXT
+        MENUITEM "Pre&vious Character\tSHIFT+SPACE", IDM_FONT_PREV
     END
-    POPUP "表示(&V)"
+    POPUP "&View"
     BEGIN
-        MENUITEM "ツールバー(&T)",                   ID_VIEW_TOOLBAR
-        MENUITEM "ステータスバー(&S)",                 ID_VIEW_STATUS_BAR
+        MENUITEM "&Tool Bar",                   ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
         MENUITEM SEPARATOR
-        MENUITEM "クリップボード監視(&C)",               IDM_WATCH_CLIPBOARD
-        MENUITEM "常に最上位に表示(&V)",                IDM_WINDOW_ALWAYSTOP
+        MENUITEM "&Monitor Clipboard",          IDM_WATCH_CLIPBOARD
+        MENUITEM "&Always Topmost",             IDM_WINDOW_ALWAYSTOP
     END
-    POPUP "ヘルプ(&H)"
+    POPUP "&Help"
     BEGIN
-        MENUITEM "larmoji のバージョン情報(&A)...",     ID_APP_ABOUT
+        MENUITEM "&About...",                   ID_APP_ABOUT
     END
 END
 
@@ -180,44 +113,6 @@ BEGIN
     EDITTEXT        IDC_EDIT_TEXT,7,5,128,12,ES_AUTOHSCROLL
     DEFPUSHBUTTON   "OK",IDOK,35,24,50,14
     PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,85,24,50,14
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Version
-//
-
-VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
- FILEFLAGSMASK 0x3fL
-#ifdef _DEBUG
- FILEFLAGS 0x1L
-#else
- FILEFLAGS 0x0L
-#endif
- FILEOS 0x4L
- FILETYPE 0x1L
- FILESUBTYPE 0x0L
-BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "041104b0"
-        BEGIN
-            VALUE "FileDescription", "larmoji MFC アプリケーション"
-            VALUE "FileVersion", "1, 0, 0, 1"
-            VALUE "InternalName", "larmoji"
-            VALUE "LegalCopyright", "Copyright (C) 2001"
-            VALUE "OriginalFilename", "larmoji.EXE"
-            VALUE "ProductName", "larmoji アプリケーション"
-            VALUE "ProductVersion", "1, 0, 0, 1"
-        END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x411, 1200
-    END
 END
 
 
@@ -277,7 +172,7 @@ END
 STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "larmoji"
-    AFX_IDS_IDLEMESSAGE     "レディ"
+    AFX_IDS_IDLEMESSAGE     "Ready"
 END
 
 STRINGTABLE
@@ -286,90 +181,186 @@ BEGIN
     ID_INDICATOR_CAPS       "CAP"
     ID_INDICATOR_NUM        "NUM"
     ID_INDICATOR_SCRL       "SCRL"
-    ID_INDICATOR_OVR        "上書"
-    ID_INDICATOR_REC        "記録"
-    ID_INDICATOR_KANA       "カナ"
+    ID_INDICATOR_OVR        "Overwrite"
+    ID_INDICATOR_REC        "Rec"
+    ID_INDICATOR_KANA       "Kana"
 END
 
 STRINGTABLE
 BEGIN
-    ID_APP_ABOUT            "プログラムの情報、バージョンそして著作権を表示\nバージョン情報"
-    ID_APP_EXIT             "アプリケーションを終了し、ファイルの保存を指示\n終了"
+    ID_APP_ABOUT            "Information about Application, version and copyright\nInformation"
+    ID_APP_EXIT             "Quit Application\nQuit"
 END
 
 STRINGTABLE
 BEGIN
-    ID_NEXT_PANE            "次のウィンドウに切り替える\n次のペイン"
-    ID_PREV_PANE            "前のウィンドウに切り替える\n前のペイン"
+    ID_EDIT_CLEAR           "Clear Selected Range\nClear"
+    ID_EDIT_CLEAR_ALL       "Clear Alllear All"
+    ID_EDIT_COPY            "Copy Selected Range to Clipboard.\nCopy"
+    ID_EDIT_CUT             "Cut Selected Range to Clipboard.\nCut"
+    ID_EDIT_FIND            "Find specified string\nFind"
+    ID_EDIT_PASTE           "Paste clipboard content\nPaste"
+    ID_EDIT_REPEAT          "Undo previous action\nUndo"
 END
 
 STRINGTABLE
 BEGIN
-    ID_WINDOW_SPLIT         "作業中のウィンドウを分割\n分割"
+    ID_VIEW_TOOLBAR         "Show Toolbar on/off\nShow Toolbar"
+    ID_VIEW_STATUS_BAR      "Show Statusbar on/off\nStatusbar"
 END
 
 STRINGTABLE
 BEGIN
-    ID_EDIT_CLEAR           "選択範囲を消去\n消去"
-    ID_EDIT_CLEAR_ALL       "すべて消去\nすべて消去"
-    ID_EDIT_COPY            "選択範囲をコピーしてクリップボードに保存\nコピー"
-    ID_EDIT_CUT             "選択範囲を切り取ってクリップボードに保存\n切り取り"
-    ID_EDIT_FIND            "指定した文字列の検索\n検索"
-    ID_EDIT_PASTE           "クリップボードの内容を貼り付け\n貼り付け"
-    ID_EDIT_REPEAT          "直前に行った動作を繰り返す\n繰り返し"
-    ID_EDIT_REPLACE         "指定した文字列を他の文字列で置換\n置換"
-    ID_EDIT_SELECT_ALL      "ファイル内のすべてを選択\nすべて選択"
-    ID_EDIT_UNDO            "直前に行った動作を元に戻す\n元に戻す"
-    ID_EDIT_REDO            "直前に行った動作を繰り返す\n繰り返す"
+    AFX_IDS_SCSIZE          "Change Window Size"
+    AFX_IDS_SCMOVE          "Change Window Location"
+    AFX_IDS_SCMINIMIZE      "Minimize Window"
+    AFX_IDS_SCMAXIMIZE      "Maximize Window"
 END
 
 STRINGTABLE
 BEGIN
-    ID_VIEW_TOOLBAR         "ツールバーの 表示/非表示\nツールバーの表示切り替え"
-    ID_VIEW_STATUS_BAR      "ステータスバーの 表示/非表示\nステータスバーの表示切り替え"
-END
-
-STRINGTABLE
-BEGIN
-    AFX_IDS_SCSIZE          "ウィンドウのサイズを変更"
-    AFX_IDS_SCMOVE          "ウィンドウの位置を変更"
-    AFX_IDS_SCMINIMIZE      "ウィンドウを最小化する"
-    AFX_IDS_SCMAXIMIZE      "ウィンドウを最大化する"
-    AFX_IDS_SCNEXTWINDOW    "次のウィンドウに切り替える"
-    AFX_IDS_SCPREVWINDOW    "前のウィンドウに切り替える"
-    AFX_IDS_SCCLOSE         "作業中のウィンドウを閉じ、変更したファイルの保存を指示"
-END
-
-STRINGTABLE
-BEGIN
-    AFX_IDS_SCRESTORE       "ウィンドウを通常のサイズに戻す"
-    AFX_IDS_SCTASKLIST      "アプリケーションの切り替え"
     ID_INDICATOR_INDEX      "000 / 000"
 END
 
 STRINGTABLE
 BEGIN
-    IDM_WATCH_CLIPBOARD     "クリップボードの監視をします。\nクリップボードの監視"
-    IDM_WINDOW_ALWAYSTOP    "ウインドウを常に最上位に表示します。\n最上位に表示"
-    IDM_FONT_BOLD           "太字\n太字を表示します。"
-    IDM_FONT_ITALIC         "イタリック\nイタリックを表示します。"
-    IDM_FONT_PREV           "前の文字に移動します。\n前の文字"
-    IDM_FONT_NEXT           "次の文字に移動します。\n次の文字"
-    IDM_MENU_INPUTSTRING    "文字列の入力\n文字列の入力"
+    IDM_WATCH_CLIPBOARD     "Monitor Clipboard\nMonitor Clipboard"
+    IDM_WINDOW_ALWAYSTOP    "Keep window topmost\nTopMost"
+    IDM_FONT_BOLD           "Bold\nBold"
+    IDM_FONT_ITALIC         "Italic\nItalic"
+    IDM_FONT_PREV           "Move to previous character.\nPrevious Character"
+    IDM_FONT_NEXT           "Move to next character.\nNext Character"
+    IDM_MENU_INPUTSTRING    "Input String\nInput String"
 END
 
 STRINGTABLE
 BEGIN
     ID_INDICATOR_UNICODE    "0XXXXX=000000"
-    ID_INDICATOR_MAIN       "レディ"
+    ID_INDICATOR_MAIN       "Ready"
 END
 
 STRINGTABLE
 BEGIN
-    ID_FILE_NEW             "新しいウインドウを開きます。\n新規作成"
+    ID_FILE_NEW             "Open New Window\nNew Window"
 END
 
-#endif    // Japanese (Japan) resources
+#endif    // ニュートラル (既定) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 (日本) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\larmoji.rc2""  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\\?[?X\r\n"
+    "#include ""l.jpn\\afxres.rc""          // ?W???I?R??g?|?[?l??g?g\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    SEPARATOR
+    BUTTON      ID_EDIT_PASTE
+    BUTTON      IDM_WATCH_CLIPBOARD
+    BUTTON      IDM_WINDOW_ALWAYSTOP
+    SEPARATOR
+    BUTTON      IDP_FONTNAME
+    SEPARATOR
+    BUTTON      IDM_FONT_PREV
+    BUTTON      IDM_FONT_NEXT
+    BUTTON      IDM_MENU_INPUTSTRING
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040004b0"
+        BEGIN
+            VALUE "CompanyName", "Ambiesoft"
+            VALUE "FileDescription", "larmoji MFC Application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "larmoji"
+            VALUE "LegalCopyright", "Copyright (C) 2020"
+            VALUE "OriginalFilename", "larmoji.EXE"
+            VALUE "ProductName", "larmoji Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x400, 1200
+    END
+END
+
+#endif    // 日本語 (日本) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

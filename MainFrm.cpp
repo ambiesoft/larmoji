@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 
+#include "../lsMisc/I18N.h"
+
 #include "larmoji.h"
 
 #include "MainFrm.h"
@@ -12,6 +14,8 @@
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+using namespace Ambiesoft;
 
 /////////////////////////////////////////////////////////////////////////////
 // CMainFrame
@@ -38,6 +42,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	//}}AFX_MSG_MAP
 	ON_UPDATE_COMMAND_UI(ID_INDICATOR_UNICODE, OnUpdateCode)
 	ON_UPDATE_COMMAND_UI(ID_INDICATOR_INDEX, OnUpdateIndex)
+	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTW, 0, 0xFFFF, OnToolTipText)
+	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTA, 0, 0xFFFF, OnToolTipText)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -184,7 +190,62 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+void CMainFrame::GetMessageString(UINT nID, CString& rMessage) const
+{
+	CFrameWnd::GetMessageString(nID, rMessage);
+	rMessage = I18N(rMessage);
+}
 
+
+BOOL CMainFrame::OnToolTipText(UINT uID, NMHDR* pNMHDR, LRESULT* pResult)
+{
+	ENSURE_ARG(pNMHDR != NULL);
+	ENSURE_ARG(pResult != NULL);
+	ASSERT(pNMHDR->code == TTN_NEEDTEXTA || pNMHDR->code == TTN_NEEDTEXTW);
+
+	// need to handle both ANSI and UNICODE versions of the message
+	TOOLTIPTEXTA* pTTTA = (TOOLTIPTEXTA*)pNMHDR;
+	TOOLTIPTEXTW* pTTTW = (TOOLTIPTEXTW*)pNMHDR;
+	TCHAR szFullText[256];
+	CString strTipText;
+	UINT_PTR nID = pNMHDR->idFrom;
+	if (pNMHDR->code == TTN_NEEDTEXTA && (pTTTA->uFlags & TTF_IDISHWND) ||
+		pNMHDR->code == TTN_NEEDTEXTW && (pTTTW->uFlags & TTF_IDISHWND))
+	{
+		// idFrom is actually the HWND of the tool
+		return CFrameWnd::OnToolTipText(uID, pNMHDR, pResult);
+	}
+
+	if (nID != 0) // will be zero on a separator
+	{
+		// don't handle the message if no string resource found
+		if (AfxLoadString((UINT)nID, szFullText) == 0)
+			return FALSE;
+
+		// this is the command id, not the button index
+		AfxExtractSubString(strTipText, szFullText, 1, '\n');
+
+		strTipText = I18N(strTipText);
+	}
+#ifndef _UNICODE
+	if (pNMHDR->code == TTN_NEEDTEXTA)
+		Checked::strncpy_s(pTTTA->szText, _countof(pTTTA->szText), strTipText, _TRUNCATE);
+	else
+		_mbstowcsz(pTTTW->szText, strTipText, _countof(pTTTW->szText));
+#else
+	if (pNMHDR->code == TTN_NEEDTEXTA)
+		_wcstombsz(pTTTA->szText, strTipText, _countof(pTTTA->szText));
+	else
+		Checked::wcsncpy_s(pTTTW->szText, _countof(pTTTW->szText), strTipText, _TRUNCATE);
+#endif
+	* pResult = 0;
+
+	// bring the tooltip window above other popup windows
+	::SetWindowPos(pNMHDR->hwndFrom, HWND_TOP, 0, 0, 0, 0,
+		SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOMOVE | SWP_NOOWNERZORDER);
+
+	return TRUE;    // message was handled
+}
 void CMainFrame::OnWatchClipboard() 
 {
 	m_nFlags ^= APPFLAGS_WATCHCB;
