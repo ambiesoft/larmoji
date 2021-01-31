@@ -38,6 +38,9 @@ protected:
 		// ƒƒ‚: ClassWizard ‚Í‚±‚ÌˆÊ’u‚Éƒƒ“ƒoŠÖ”‚ğ’Ç‰Á‚µ‚Ü‚·B
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	virtual BOOL OnInitDialog();
+	CEdit m_editInputString;
 };
 
 //{{AFX_INSERT_LOCATION}}

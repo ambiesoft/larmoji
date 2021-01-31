@@ -1,4 +1,4 @@
-// InputDialog.cpp : インプリメンテーション ファイル
+// InputDialog.cpp
 //
 
 #include "stdafx.h"
@@ -30,14 +30,27 @@ void CInputDialog::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CInputDialog)
 	DDX_Text(pDX, IDC_EDIT_TEXT, m_strString);
 	//}}AFX_DATA_MAP
+	DDX_Control(pDX, IDC_EDIT_TEXT, m_editInputString);
 }
 
 
 BEGIN_MESSAGE_MAP(CInputDialog, CDialog)
 	//{{AFX_MSG_MAP(CInputDialog)
-		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
+		// メモ - ClassWizard
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CInputDialog メッセージ ハンドラ
+
+
+BOOL CInputDialog::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	HWND hEdit = m_editInputString;
+	i18nChangeDialogText(*this, &hEdit, 1);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // EXCEPTION: OCX Property Pages should return FALSE
+}

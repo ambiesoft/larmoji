@@ -13,10 +13,10 @@
       <UniqueIdentifier>{f73cfbee-485d-450b-a690-c0965311e68d}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
-    <Filter Include="04 dist">
+    <Filter Include="05 dist">
       <UniqueIdentifier>{a1ddc9ed-49cc-416f-bd34-14c4e75c5f0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05 lang">
+    <Filter Include="04 lang">
       <UniqueIdentifier>{e87eca37-473b-4777-b74c-9dcba34a7850}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,6 +52,15 @@
       <Filter>02 Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\CommandLineParser.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\stdosd\stdosd.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\stdosd\stdosd_win.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,6 +101,15 @@
     <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lsMisc\CommandLineParser.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\stdosd\stdosd.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\stdosd\stdosd_literal.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\larmoji.ico">
@@ -113,15 +131,15 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="history.txt">
-      <Filter>04 dist</Filter>
+      <Filter>05 dist</Filter>
     </Text>
     <Text Include="lang\jpn.txt">
-      <Filter>05 lang</Filter>
+      <Filter>04 lang</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
-      <Filter>04 dist</Filter>
+      <Filter>05 dist</Filter>
     </None>
   </ItemGroup>
 </Project>

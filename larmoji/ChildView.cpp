@@ -105,7 +105,7 @@ void CChildView::OnPaint()
 	if( m_strTheString.length()==0 )
 	{
 //		dc.TextOut(0,0,m_strTheString.c_str());
-		TextOutW(dc, 0, 0, m_strTheString.c_str(), m_strTheString.length());
+		TextOutW(dc, 0, 0, m_strTheString.c_str(), (int)m_strTheString.length());
 	}
 #if 0
 	else if( IsDBCSLeadByte( (BYTE)(TCHAR)m_strTheString[m_nCurIndex] ))
@@ -174,7 +174,7 @@ void CChildView::SetTheString(LPCWSTR lpszString)
 //		m_nCurDBCSLen = wcslen(p);
 //		::SysFreeString(p);
 //	}
-	m_nCurLen = m_strTheString.length();
+	m_nCurLen = (int)m_strTheString.length();
 	InvalidateRect(NULL);
 
 	CString strTitle;
@@ -324,7 +324,8 @@ void CChildView::OnUpdateFontNext(CCmdUI* pCmdUI)
 void CChildView::OnMenuInputstring() 
 {
 	CInputDialog dlg;
-	if( IDOK!=dlg.DoModal() )
+
+	if (IDOK != dlg.DoModal())
 		return;
 
 	SetTheString(dlg.m_strString);

@@ -372,13 +372,12 @@ int CALLBACK EnumFontFamExProc(ENUMLOGFONTEX *lpelfe,NEWTEXTMETRICEX *lpntme,int
 	UNREFERENCED_PARAMETER(lpntme);
 	ASSERT(lpelfe);
 	ASSERT(lParam);
-//	CFontNameComboBox* pwndFontName = (CFontNameComboBox*)lParam;
+
 	if( nFontType == TRUETYPE_FONTTYPE 
 		&& lpelfe->elfLogFont.lfFaceName[0] != _T('@') )
-//		&& (lpelfe->elfLogFont.lfPitchAndFamily & VARIABLE_PITCH)==0 )
 	{
-		TRACE(CString(lpelfe->elfLogFont.lfFaceName)+_T('\n'));
-	//fill the combo box
+		// TRACE(CString(lpelfe->elfLogFont.lfFaceName)+_T('\n'));
+
 		set<wstring>* pset = (set<wstring>*)lParam;
 		pset->insert(lpelfe->elfLogFont.lfFaceName);
 	}

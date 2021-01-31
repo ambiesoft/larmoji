@@ -1,7 +1,8 @@
 
 #include "stdafx.h"
 
-
+#include "../../lsMisc/CommandLineParser.h"
+#include "../../lsMisc/stdosd/stdosd.h"
 
 #include "larmoji.h"
 
@@ -14,6 +15,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace Ambiesoft;
+using namespace Ambiesoft::stdosd;
 
 /////////////////////////////////////////////////////////////////////////////
 // CLarmojiApp
@@ -36,7 +38,27 @@ CLarmojiApp theApp;
 
 BOOL CLarmojiApp::InitInstance()
 {
-	i18nInitLangmap();
+	CCommandLineParser parser;
+	wstring lang;
+	parser.AddOption(L"-lang", 1, &lang);
+
+	parser.Parse();
+
+	if(!i18nInitLangmap(NULL, lang.c_str()))
+	{
+		AfxMessageBox(
+			stdFormat(I18N(L"Failed to initialize language with '%s'. Default language will be used."),
+			lang.c_str()).c_str());
+	}
+	else
+	{
+		if (lstrcmpi(lang.c_str(), i18nGetCurrentLang()) != 0)
+		{
+			AfxMessageBox(
+				stdFormat(I18N(L"'%s' is different with applied language '%s'."),
+					lang.c_str(), i18nGetCurrentLang()).c_str());
+		}
+	}
 
 #ifdef _AFXDLL
 	// Enable3dControls();
@@ -47,21 +69,21 @@ BOOL CLarmojiApp::InitInstance()
 	if( !AfxOleInit() )
 		return FALSE;
 
-	TCHAR szProfileName[MAX_PATH] = {_T('\0')};
-	VERIFY(GetModuleFileName(NULL, szProfileName, sizeof(szProfileName)));
-	LPTSTR lpszExt = _tcsrchr(szProfileName, '.');
-	ASSERT(lpszExt);
-	*lpszExt = _T('\0');
-	lstrcat(szProfileName, _T(".ini"));
-	free((void*)m_pszProfileName);
-	m_pszProfileName = _tcsdup(szProfileName);
+	{
+		TCHAR szProfileName[MAX_PATH] = { _T('\0') };
+		VERIFY(GetModuleFileName(NULL, szProfileName, sizeof(szProfileName)));
+		LPTSTR lpszExt = _tcsrchr(szProfileName, '.');
+		ASSERT(lpszExt);
+		*lpszExt = _T('\0');
+		lstrcat(szProfileName, _T(".ini"));
+		free((void*)m_pszProfileName);
+		m_pszProfileName = _tcsdup(szProfileName);
+	}
 
 	CF_LARMOJIIGNORE = RegisterClipboardFormat(_T("CLIPBOARDFORMAT_LARMOJI_IGNORE"));
 
 	CMainFrame* pFrame = new CMainFrame;
 	m_pMainWnd = pFrame;
-
-
 	pFrame->LoadFrame(IDR_MAINFRAME,
 		WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, NULL, 
 		NULL);
@@ -108,7 +130,7 @@ public:
 	// ClassWizard
 	//{{AFX_VIRTUAL(CAboutDlg)
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV のサポート
+	virtual void DoDataExchange(CDataExchange* pDX);
 	//}}AFX_VIRTUAL
 
 
@@ -118,6 +140,8 @@ protected:
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
+public:
+	virtual BOOL OnInitDialog();
 };
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
@@ -156,3 +180,14 @@ void CLarmojiApp::OnFileNew()
 }
 
 
+
+
+BOOL CAboutDlg::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	i18nChangeWindowText(*this);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // EXCEPTION: OCX Property Pages should return FALSE
+}
