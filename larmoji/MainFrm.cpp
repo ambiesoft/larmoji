@@ -367,7 +367,13 @@ void CMainFrame::OnUpdateWindowAlwaystop(CCmdUI* pCmdUI)
 	pCmdUI->SetCheck( (m_nFlags & APPFLAGS_ALWAYSTOP) != 0 );
 }
 
-
+struct custom_compare final
+{
+	bool operator() (const wstring& left, const wstring& right) const
+	{
+		return lstrcmpi(right.c_str(), left.c_str()) < 0;
+	}
+};
 int CALLBACK EnumFontFamExProc(ENUMLOGFONTEX *lpelfe,NEWTEXTMETRICEX *lpntme,int nFontType,LPARAM lParam)
 {
 	UNREFERENCED_PARAMETER(lpntme);
@@ -377,9 +383,7 @@ int CALLBACK EnumFontFamExProc(ENUMLOGFONTEX *lpelfe,NEWTEXTMETRICEX *lpntme,int
 	if( nFontType == TRUETYPE_FONTTYPE 
 		&& lpelfe->elfLogFont.lfFaceName[0] != _T('@') )
 	{
-		// TRACE(CString(lpelfe->elfLogFont.lfFaceName)+_T('\n'));
-
-		set<wstring>* pset = (set<wstring>*)lParam;
+		set<wstring, custom_compare>* pset = (set<wstring, custom_compare>*)lParam;
 		pset->insert(lpelfe->elfLogFont.lfFaceName);
 	}
 	return 1;
@@ -388,9 +392,8 @@ int CALLBACK EnumFontFamExProc(ENUMLOGFONTEX *lpelfe,NEWTEXTMETRICEX *lpntme,int
 BOOL CMainFrame::InitCombobox()
 {
 	CDC* pDC = GetDC();
-	
 
-	set<wstring> stringset;
+	set<wstring, custom_compare> stringset({}, custom_compare{});
 
 	{
 		LOGFONT lf = {0};
@@ -422,14 +425,12 @@ BOOL CMainFrame::InitCombobox()
 	}
 
 
-	set<wstring>::iterator it;
-	for ( it = stringset.begin() ; it != stringset.end() ; ++it )
+	for ( auto&& s : stringset)
 	{
 		COMBOBOXEXITEM item = {0};
 		item.iItem = 0;
 		item.mask = CBEIF_TEXT;
-//		item.pszText = (LPTSTR)lpelfe->elfLogFont.lfFaceName;
-		item.pszText = (LPTSTR)((*it).c_str());
+		item.pszText = (LPTSTR)(s.c_str());
 		m_wndToolBar.m_cmbFontName.InsertItem(&item);
 	}
 
