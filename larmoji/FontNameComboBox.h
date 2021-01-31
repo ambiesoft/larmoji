@@ -11,10 +11,6 @@ public:
 	CFontNameComboBox();
 
 public:
-
-public:
-
-
 	// ClassWizard
 	//{{AFX_VIRTUAL(CFontNameComboBox)
 	//}}AFX_VIRTUAL

@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
-// CInputDialog ダイアログ
+// CInputDialog
 
 
 CInputDialog::CInputDialog(CWnd* pParent /*=NULL*/)
@@ -36,12 +36,12 @@ void CInputDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CInputDialog, CDialog)
 	//{{AFX_MSG_MAP(CInputDialog)
-		// メモ - ClassWizard
+		// 
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CInputDialog メッセージ ハンドラ
+// CInputDialog
 
 
 BOOL CInputDialog::OnInitDialog()

@@ -38,3 +38,5 @@
 
 "Cancel"="キャンセル"
 "OK"="OK"
+
+"Choose Font"="フォントを選択"

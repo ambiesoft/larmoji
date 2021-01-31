@@ -1,4 +1,4 @@
-// MainFrm.cpp : CMainFrame クラスの動作の定義を行います。
+// MainFrm.cpp
 //
 
 #include "stdafx.h"
@@ -101,7 +101,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//
 	//First get the index of the placeholder's position in the toolbar
 	int nFontNameIndex = 0;
-	while (m_wndToolBar.GetItemID(nFontNameIndex) != IDP_FONTNAME) nFontNameIndex++;
+	while (m_wndToolBar.GetItemID(nFontNameIndex) != IDP_FONTNAME) 
+		nFontNameIndex++;
 
 	//next convert that button to a seperator and get its position
 	m_wndToolBar.SetButtonInfo(nFontNameIndex, IDP_FONTNAME, TBBS_SEPARATOR,
@@ -109,11 +110,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndToolBar.GetItemRect(nFontNameIndex, &rect);
 
 	//expand the rectangle to allow the combo box room to drop down
-	rect.top+=1;
+	//rect.top+=1;
 	rect.bottom += 200;
 
 	// then .Create the combo box and show it
-	if (!m_wndToolBar.m_wndFontName.Create(WS_CHILD|WS_VISIBLE|CBS_AUTOHSCROLL| 
+	if (!m_wndToolBar.m_cmbFontName.Create(WS_CHILD|WS_VISIBLE|CBS_AUTOHSCROLL| 
 									   CBS_DROPDOWNLIST,
 									   rect, &m_wndToolBar, IDC_FONTNAME_COMBO))
 	{
@@ -281,7 +282,7 @@ void CMainFrame::OnDestroy()
 		m_hNextWnd = NULL;
 	}
 
-	int nLastSel = m_wndToolBar.m_wndFontName.GetCurSel();
+	int nLastSel = m_wndToolBar.m_cmbFontName.GetCurSel();
 	if( nLastSel != CB_ERR )
 		theApp.WriteProfileInt(STR_SECTION_SETTING, STR_FONTFACECOMBO_INDEX, nLastSel);
 	
@@ -429,14 +430,14 @@ BOOL CMainFrame::InitCombobox()
 		item.mask = CBEIF_TEXT;
 //		item.pszText = (LPTSTR)lpelfe->elfLogFont.lfFaceName;
 		item.pszText = (LPTSTR)((*it).c_str());
-		m_wndToolBar.m_wndFontName.InsertItem(&item);
+		m_wndToolBar.m_cmbFontName.InsertItem(&item);
 	}
 
 	int nLastSel = theApp.GetProfileInt(STR_SECTION_SETTING, STR_FONTFACECOMBO_INDEX, 0);
-	if( nLastSel > m_wndToolBar.m_wndFontName.GetCount() )
+	if( nLastSel > m_wndToolBar.m_cmbFontName.GetCount() )
 		nLastSel = 0;
 
-	m_wndToolBar.m_wndFontName.SetCurSel(nLastSel);
+	m_wndToolBar.m_cmbFontName.SetCurSel(nLastSel);
 	
 	ReleaseDC(pDC);
 
@@ -449,7 +450,7 @@ CString CMainFrame::GetCurFontName()
 {
 	CString strRet;
 	
-	int nCurSel = m_wndToolBar.m_wndFontName.GetCurSel();
+	int nCurSel = m_wndToolBar.m_cmbFontName.GetCurSel();
 	if (nCurSel == CB_ERR)
 		return strRet;
 	
@@ -458,7 +459,7 @@ CString CMainFrame::GetCurFontName()
 	item.cchTextMax = LF_FACESIZE + 1;
 	item.mask = CBEIF_TEXT;
 	item.pszText = strRet.GetBuffer(LF_FACESIZE+1);
-	m_wndToolBar.m_wndFontName.GetItem(&item);
+	m_wndToolBar.m_cmbFontName.GetItem(&item);
 
 	strRet.ReleaseBuffer();
 	return strRet;
@@ -468,18 +469,6 @@ void CMainFrame::OnUpdateCode(CCmdUI* pCmdUI)
 {
 	pCmdUI->SetText(m_wndView.GetCodeString());
 }
-
-/**
-void CMainFrame::OnUpdateDBCSIndex(CCmdUI* pCmdUI)
-{
-	static TCHAR szCode[20];
-
-	wsprintf( szCode, _T("%3d / %3d"), 
-		(1+m_wndView.m_nCurDBCSIndex), m_wndView.GetCurDBCSLen());
-
-	pCmdUI->SetText(szCode);
-}
-**/
 
 void CMainFrame::OnUpdateIndex(CCmdUI* pCmdUI)
 {

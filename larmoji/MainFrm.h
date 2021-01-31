@@ -21,24 +21,22 @@ public:
 protected: 
 	DECLARE_DYNAMIC(CMainFrame)
 
-// アトリビュート
 public:
 
-// オペレーション
+
 public:
 	UINT GetFlag() const { return m_nFlags; }
 	BOOL IsBold() const { return m_nFlags & APPFLAGS_BOLD; }
 	BOOL IsItalic() const { return m_nFlags & APPFLAGS_ITALIC; }
 
-// オーバーライド
-	// ClassWizard は仮想関数のオーバーライドを生成します。
+
 	//{{AFX_VIRTUAL(CMainFrame)
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 	//}}AFX_VIRTUAL
 
 	virtual void GetMessageString(UINT nID, CString& rMessage) const override;
-// インプリメンテーション
+
 public:
 	CString GetCurFontName();
 	BOOL InitCombobox();
@@ -48,13 +46,13 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:  // コントロール バー用メンバ
+protected:
 	CStatusBar  m_wndStatusBar;
 	CMainToolBar    m_wndToolBar;
+
 public:
 	CChildView    m_wndView;
 
-// 生成されたメッセージ マップ関数
 protected:
 	HWND m_hNextWnd;
 	
@@ -92,6 +90,6 @@ protected:
 /////////////////////////////////////////////////////////////////////////////
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
+// Microsoft Visual C++
 
 #endif // !defined(AFX_MAINFRM_H__D578306A_745A_11D5_8E03_A40A1FE48159__INCLUDED_)

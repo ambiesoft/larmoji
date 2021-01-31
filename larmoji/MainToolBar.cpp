@@ -1,4 +1,4 @@
-// MainToolBar.cpp : インプリメンテーション ファイル
+// MainToolBar.cpp
 //
 
 #include "stdafx.h"
@@ -25,9 +25,9 @@ CMainToolBar::~CMainToolBar()
 
 BEGIN_MESSAGE_MAP(CMainToolBar, CToolBar)
 	//{{AFX_MSG_MAP(CMainToolBar)
-		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
+		// 
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CMainToolBar メッセージ ハンドラ
+// CMainToolBar

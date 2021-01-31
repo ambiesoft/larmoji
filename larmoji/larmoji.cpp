@@ -50,7 +50,7 @@ BOOL CLarmojiApp::InitInstance()
 			stdFormat(I18N(L"Failed to initialize language with '%s'. Default language will be used."),
 			lang.c_str()).c_str());
 	}
-	else
+	else if(!lang.empty())
 	{
 		if (lstrcmpi(lang.c_str(), i18nGetCurrentLang()) != 0)
 		{

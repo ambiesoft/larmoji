@@ -8,13 +8,13 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#define VC_EXTRALEAN		// Windows ヘッダーから殆ど使用されないスタッフを除外します。
+#define VC_EXTRALEAN
 #include <SDKDDKVer.h>
-#include <afxwin.h>         // MFC のコアおよび標準コンポーネント
-#include <afxext.h>         // MFC の拡張部分
-#include <afxdtctl.h>		// MFC の Internet Explorer 4 コモン コントロール サポート
+#include <afxwin.h>
+#include <afxext.h>
+#include <afxdtctl.h>
 #ifndef _AFX_NO_AFXCMN_SUPPORT
-#include <afxcmn.h>			// MFC の Windows コモン コントロール サポート
+#include <afxcmn.h>
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 #include <afxpriv.h>    // for WM_SETMESSAGESTRING
@@ -24,7 +24,7 @@
 #include <set>
 using namespace std;
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
+// Microsoft Visual C++
 
 #include "../../lsMisc/I18N.h"
 using namespace Ambiesoft;

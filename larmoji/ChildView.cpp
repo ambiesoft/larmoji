@@ -71,19 +71,24 @@ void CChildView::OnPaint()
 	
 	if( m_strTheString.length()==0 )
 	{
-		dc.TextOut(0,0,m_strTheString.c_str());
+		dc.TextOut(0, 0, m_strTheString.c_str());
 		return;
 	}
 
-//	dc.SetMapMode(MM_TEXT);
 	CFont font;
 	CRect r;
 	GetClientRect(r);
-	WCHAR tc = m_strTheString[m_nCurIndex];
 
-//	dc.DPtoLP(r);
+	WCHAR tc[2];
+	tc[0] = m_strTheString[m_nCurIndex];
+	tc[1] = 0;
+	if (IS_SURROGATE_PAIR(m_strTheString[m_nCurIndex], m_strTheString[m_nCurIndex + 1]))
+	{
+		tc[1]= m_strTheString[m_nCurIndex+1];
+	}
+	
+
 	LOGFONT lf = {0};
-//	lf.lfHeight = 0;//-MulDiv(r.Height(), GetDeviceCaps(dc, LOGPIXELSY), 72);//-r.Height();
 	lf.lfHeight = r.Height();
 	lf.lfWidth = 0;
 
@@ -94,86 +99,40 @@ void CChildView::OnPaint()
 	if( ((CMainFrame*)theApp.m_pMainWnd)->IsItalic() )
 		lf.lfItalic = TRUE;
 
-	lf.lfCharSet = 0;//GB2312_CHARSET;
+	lf.lfCharSet = 0;
 	lf.lfPitchAndFamily = FF_MODERN;
 
 	lstrcpy(lf.lfFaceName, curFontName);
 	font.CreateFontIndirect(&lf);
 	CFont* pOldFont = dc.SelectObject(&font);
 
-	WCHAR szText[3];
-	if( m_strTheString.length()==0 )
-	{
-//		dc.TextOut(0,0,m_strTheString.c_str());
-		TextOutW(dc, 0, 0, m_strTheString.c_str(), (int)m_strTheString.length());
-	}
-#if 0
-	else if( IsDBCSLeadByte( (BYTE)(TCHAR)m_strTheString[m_nCurIndex] ))
-	{
-		szText[0] = m_strTheString[m_nCurIndex];
-		szText[1] = m_strTheString[m_nCurIndex+1];
-		dc.TextOut(0,0,szText,2);
-	}
-#endif
-	else
-	{
-		szText[0] = m_strTheString[m_nCurIndex];
-		DrawTextW(dc, &tc, 1,
-			&r, DT_CENTER|DT_TOP);
-	}
+	ASSERT(m_strTheString.length() != 0);
+
+	DrawTextW(dc,
+		tc,
+		tc[1] ? 2 : 1,
+		&r,
+		DT_CENTER | DT_TOP);
+
 
 	dc.SelectObject(pOldFont);
 }
 
 void CChildView::SetTheString(LPCWSTR lpszString)
 {
-
-	if( lpszString==NULL )
+	if (lpszString == NULL)
 	{
-//		m_strTheString.Empty();
 		m_strTheString = L"";
 	}
 	else
 	{
-#if 0
-		int nCount = 0;
-		int nOrgLen = lstrlen(lpszString);
-		LPTSTR p = m_strTheString.GetBuffer(min(260,nOrgLen));
-		while(*lpszString && nCount < 256)
-		{
-			if( *lpszString != _T('\t') 
-				&& *lpszString != _T('\r') 
-				&& *lpszString != _T('\n') )
-			{
-				p[nCount++] = *(lpszString++);
-				if( IsDBCSLeadByte( (BYTE)*(lpszString-1) ) )
-				{
-					p[nCount++] = *(lpszString++);
-				}
-			}
-			else
-				lpszString++;
-		}
-		p[nCount] = _T('\0');
-		m_strTheString.ReleaseBuffer();
-#endif
-
 		WCHAR* p = (WCHAR*)calloc(256, sizeof(WCHAR));
 		memcpy(p, lpszString, sizeof(WCHAR)*min(255, wcslen(lpszString)));
 		m_strTheString = p;
 		free(p);
 	}
 
-//	m_strTheString = lpszString;
 	m_nCurIndex = 0;
-//	m_nCurDBCSIndex = 0;
-//	m_pLasthitToMB = NULL;
-	
-//	{
-//		BSTR p = m_strTheString.AllocSysString();
-//		m_nCurDBCSLen = wcslen(p);
-//		::SysFreeString(p);
-//	}
 	m_nCurLen = (int)m_strTheString.length();
 	InvalidateRect(NULL);
 
@@ -186,18 +145,6 @@ void CChildView::SetTheString(LPCWSTR lpszString)
 void CChildView::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {
 	CWnd ::OnLButtonDblClk(nFlags, point);
-/***
-	CInputDialog dlg;
-	if( IDOK!=dlg.DoModal() )
-		return;
-
-	SetTheString(dlg.m_strString);
-#ifndef UNICODE
-	ASSERT(0);
-#endif
-	InvalidateRect(NULL);
-
-***/
 }
 
 int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct) 
@@ -211,30 +158,19 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 CString CChildView::GetCodeString()
 {
-/**
-	if( m_strTheString.IsEmpty() )
+	CString strRet;
+	if (IS_SURROGATE_PAIR(m_strTheString[m_nCurIndex], m_strTheString[m_nCurIndex + 1]))
 	{
-		lstrcpy(szCode, _T("SJIS :"));
-	}
-	else if( IsDBCSLeadByte((BYTE)m_strTheString[m_nCurIndex]) )
-	{
-		_stprintf(szCode, _T("SJIS : 0x%02x%02x"), 
-			(0xFF & (int)(UINT)m_strTheString[m_nCurIndex]),
-			(0xFF & (int)(UINT)m_strTheString[m_nCurIndex+1]));
-
+		strRet.Format(_T(" 0x%04X,0x%04X"),
+			0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex],
+			0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex + 1]);
 	}
 	else
 	{
-		_stprintf(szCode, _T("SJIS : 0x%02x"), 
-			(0xFF & (int)(UINT)m_strTheString[m_nCurIndex]));
+		strRet.Format(_T(" 0x%04X=%d"),
+			0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex],
+			(UINT)m_strTheString[m_nCurIndex]);
 	}
-**/
-
-	CString strRet;
-	strRet.Format(_T(" 0x%04X=%d"),
-		0xFFFF & (WCHAR)(UINT)m_strTheString[m_nCurIndex],
-		(UINT)m_strTheString[m_nCurIndex]);
-
 	return strRet;
 }
 
@@ -246,35 +182,11 @@ void CChildView::OnFontPrev()
 	if(m_nCurIndex==0)
 		return;
 
-	if( m_nCurIndex >= 2 )
-	{	
-//		TRACE(CString(m_strTheString[m_nCurIndex-2])+_T('\n'));
-
-//		if( m_pLasthitToMB==NULL )
-//		{
-			m_nCurIndex--;
-//		}
-//		else
-		{
-/**
-			LPCTSTR pBuff = m_strTheString;
-			pBuff += m_nCurIndex;
-			LPCTSTR pPrev = _tcsdec(m_pLasthitToMB, pBuff);
-			if(NULL == pPrev)
-			{
-				pPrev = _tcsdec((LPCTSTR)m_strTheString, pBuff);
-				ASSERT(pPrev);
-			}
-
-			m_pLasthitToMB = pPrev;
-			m_nCurIndex-=(pBuff-pPrev);
-**/
-
-		}
-	}
-	else
+	m_nCurIndex--;
+	if (m_nCurIndex != 0)
 	{
-		m_nCurIndex--;
+		if (IS_SURROGATE_PAIR(m_strTheString[m_nCurIndex-1], m_strTheString[m_nCurIndex]))
+			m_nCurIndex--;
 	}
 
 	InvalidateRect(NULL);
@@ -283,22 +195,29 @@ void CChildView::OnFontPrev()
 
 void CChildView::OnUpdateFontPrev(CCmdUI* pCmdUI) 
 {
-	pCmdUI->Enable(m_nCurIndex!=0);	
+	pCmdUI->Enable(m_nCurIndex != 0);
 }
 
 void CChildView::OnFontNext() 
 {
 	if( m_strTheString.length() <= (m_nCurIndex+1) )
 		return;
+	
+	if (IS_SURROGATE_PAIR(m_strTheString[m_nCurIndex], m_strTheString[m_nCurIndex + 1]))
+	{
+		++m_nCurIndex;
+		if (m_strTheString.length() <= (m_nCurIndex + 1))
+		{
+			--m_nCurIndex;
+			return;
+		}
+		++m_nCurIndex;
+	}
+	else
+	{
+		++m_nCurIndex;
+	}
 
-//	if( IsDBCSLeadByte((BYTE)m_strTheString[m_nCurIndex]) )
-//	{
-//		m_pLasthitToMB = m_strTheString;
-//		m_pLasthitToMB += m_nCurIndex;
-//		m_nCurIndex++;
-//	}
-	m_nCurIndex++;
-//	m_nCurDBCSIndex++;
 	InvalidateRect(NULL);
 }
 
@@ -310,13 +229,13 @@ void CChildView::OnUpdateFontNext(CCmdUI* pCmdUI)
 	}
 	else
 	{
-//		if( IsDBCSLeadByte( (BYTE)m_strTheString[m_nCurIndex] ) )
-//		{
-//			pCmdUI->Enable(m_strTheString.GetLength() > (m_nCurIndex+2));	
-//		}
-//		else
+		if(IS_SURROGATE_PAIR(m_strTheString[m_nCurIndex], m_strTheString[m_nCurIndex+1]))
 		{
-			pCmdUI->Enable(m_strTheString.length() > (m_nCurIndex+1));	
+			pCmdUI->Enable(m_strTheString.length() > (m_nCurIndex + 2));
+		}
+		else
+		{
+			pCmdUI->Enable(m_strTheString.length() > (m_nCurIndex + 1));
 		}
 	}
 }

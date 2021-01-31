@@ -4,10 +4,9 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// MainDropTarget.h : ヘッダー ファイル
+// MainDropTarget.h
 //
-/////////////////////////////////////////////////////////////////////////////
-// CMainDropTarget ドキュメント
+
 class CShellTreeFav;
 class CMainDropTarget : public COleDropTarget  
 {
@@ -25,6 +24,6 @@ public:
 };
 
 //{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。
+// Microsoft Visual C++
 
 #endif // !defined(AFX_OLEFAVDROPTARGET_H__2EA91880_6752_11D4_8DFC_9BA945BEAE5A__INCLUDED_)
