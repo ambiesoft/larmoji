@@ -114,9 +114,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	rect.bottom += 200;
 
 	// then .Create the combo box and show it
-	if (!m_wndToolBar.m_cmbFontName.Create(WS_CHILD|WS_VISIBLE|CBS_AUTOHSCROLL| 
-									   CBS_DROPDOWNLIST,
-									   rect, &m_wndToolBar, IDC_FONTNAME_COMBO))
+	if (!m_wndToolBar.m_cmbFontName.Create(
+		WS_CHILD | WS_VISIBLE | CBS_AUTOHSCROLL | CBS_DROPDOWNLIST,
+		rect, &m_wndToolBar, IDC_FONTNAME_COMBO))
 	{
 		TRACE0("Failed to create combo-box\n");
 		return FALSE;

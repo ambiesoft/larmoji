@@ -28,6 +28,7 @@ BEGIN_MESSAGE_MAP(CFontNameComboBox, CComboBoxEx)
 	//{{AFX_MSG_MAP(CFontNameComboBox)
 	ON_CONTROL_REFLECT(CBN_SELCHANGE, OnSelchange)
 	//}}AFX_MSG_MAP
+	ON_CONTROL_REFLECT(CBN_CLOSEUP, OnCloseUp)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -36,4 +37,8 @@ END_MESSAGE_MAP()
 void CFontNameComboBox::OnSelchange() 
 {
 	((CMainFrame*)theApp.m_pMainWnd)->m_wndView.InvalidateRect(NULL);
+}
+void CFontNameComboBox::OnCloseUp()
+{
+	((CMainFrame*)theApp.m_pMainWnd)->m_wndView.SetFocus();
 }

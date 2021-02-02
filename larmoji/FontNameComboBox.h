@@ -24,7 +24,7 @@ protected:
 	//{{AFX_MSG(CFontNameComboBox)
 	afx_msg void OnSelchange();
 	//}}AFX_MSG
-
+	afx_msg void OnCloseUp();
 	DECLARE_MESSAGE_MAP()
 };
 

@@ -17,8 +17,6 @@ public:
 	CMainToolBar();
 
 public:
-	
-public:
 
 	// ClassWizard
 	//{{AFX_VIRTUAL(CMainToolBar)

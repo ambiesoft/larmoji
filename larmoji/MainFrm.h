@@ -47,8 +47,8 @@ public:
 #endif
 
 protected:
-	CStatusBar  m_wndStatusBar;
-	CMainToolBar    m_wndToolBar;
+	CStatusBar m_wndStatusBar;
+	CMainToolBar m_wndToolBar;
 
 public:
 	CChildView    m_wndView;
@@ -81,7 +81,6 @@ protected:
 	afx_msg void OnUpdateFontItalic(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	afx_msg void OnUpdateCode(CCmdUI* pCmdUI);
-//	afx_msg void OnUpdateDBCSIndex(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateIndex(CCmdUI* pCmdUI);
 	afx_msg BOOL OnToolTipText(UINT nID, NMHDR* pNMHDR, LRESULT* pResult);
 	DECLARE_MESSAGE_MAP()
