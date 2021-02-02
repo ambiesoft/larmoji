@@ -5,35 +5,30 @@
     "configuration": "Release",
     "targets": [
         {
-            "setoutdirforbuild": false,
-            "outdir": "Release\\v142\\larmoji\\",            
+            "setoutdirforbuild": true,
+            "outdir": "Build\\larmoji\\x86\\",
             "platform": "Win32"
         },
         {
-            "setoutdirforbuild": false,
-            "outdir": "Release\\v142\\larmoji\\",            
+            "setoutdirforbuild": true,
+            "outdir": "Build\\larmoji\\x64\\",
             "platform": "x64"
         }
     ],
     "ShouldBeFiles": [
-        "x86\\lang\\jpn.txt",
-        "x86\\larmoji.exe",
-        "x86\\larmoji.pdb",
-        "x86\\README.md",
-        "x86\\history.txt",
-
-        "x64\\lang\\jpn.txt",
-        "x64\\larmoji.exe",
-        "x64\\larmoji.pdb",
-        "x64\\README.md",
-        "x64\\history.txt"
+        "lang\\jpn.txt",
+        "larmoji.exe",
+        "larmoji.pdb",
+        "README.md",
+        "history.txt"
     ],
     "TotalFileCount": "exact",
+    "archivingdir": "Build\\larmoji\\",
     "archivedir": "C:\\Linkout\\",
     "remotedir": "http://ambiesoft.mooo.com/ffdav/uploads/larmoji/",
     "remotesha1": "http://ambiesoft.mooo.com/ffdav/uploads/getSha1.php?file=larmoji/{}",
     "ShouldNotBeFiles": [],
     "ShouldBeOneOfThem": [],
-    "obtainverfrom": "x86\\history.txt",
-    "obtainverregex": "\\d+\\.\\d+\\.\\d"
+    "obtainverfrom": "history.txt",
+    "obtainverregex": "\\d+\\.\\d+\\.\\d+"
 }
