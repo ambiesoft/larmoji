@@ -46,9 +46,12 @@ BOOL CLarmojiApp::InitInstance()
 
 	if(!i18nInitLangmap(NULL, lang.c_str()))
 	{
-		AfxMessageBox(
-			stdFormat(I18N(L"Failed to initialize language with '%s'. Default language will be used."),
-			lang.c_str()).c_str());
+		if (!lang.empty())
+		{
+			AfxMessageBox(
+				stdFormat(I18N(L"Failed to initialize language with '%s'. Default language will be used."),
+					lang.c_str()).c_str());
+		}
 	}
 	else if(!lang.empty())
 	{
