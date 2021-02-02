@@ -16,8 +16,6 @@ static char THIS_FILE[] = __FILE__;
 CChildView::CChildView()
 {
 	m_nCurIndex = 0;
-//	m_nCurDBCSIndex = 0;
-//	m_pLasthitToMB = NULL;
 	m_nCurLen = 0;
 }
 
@@ -29,7 +27,6 @@ CChildView::~CChildView()
 BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	//{{AFX_MSG_MAP(CChildView)
 	ON_WM_PAINT()
-	ON_WM_LBUTTONDBLCLK()
 	ON_WM_CREATE()
 	ON_COMMAND(IDM_FONT_PREV, OnFontPrev)
 	ON_UPDATE_COMMAND_UI(IDM_FONT_PREV, OnUpdateFontPrev)
@@ -38,7 +35,6 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_COMMAND(IDM_MENU_INPUTSTRING, OnMenuInputstring)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
-	ON_WM_MOUSEACTIVATE()
 	ON_WM_MBUTTONUP()
 	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
@@ -142,10 +138,6 @@ void CChildView::SetTheString(LPCWSTR lpszString)
 }
 
 
-void CChildView::OnLButtonDblClk(UINT nFlags, CPoint point) 
-{
-	CWnd ::OnLButtonDblClk(nFlags, point);
-}
 
 int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct) 
 {
@@ -258,22 +250,17 @@ void CChildView::OnMenuInputstring()
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point) 
 {
 	OnFontNext();
-	CWnd ::OnLButtonDown(nFlags, point);
+	CWnd::OnLButtonDown(nFlags, point);
 }
 
 void CChildView::OnRButtonDown(UINT nFlags, CPoint point) 
 {
 	OnFontPrev();
-	CWnd ::OnRButtonDown(nFlags, point);
+	CWnd::OnRButtonDown(nFlags, point);
 }
 
 
 
-int CChildView::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message) 
-{
-	TRACE(_T("%d %d\n"), nHitTest, message);
-	return CWnd ::OnMouseActivate(pDesktopWnd, nHitTest, message);
-}
 
 void CChildView::OnMButtonUp(UINT nFlags, CPoint point) 
 {

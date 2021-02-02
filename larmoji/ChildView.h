@@ -54,7 +54,6 @@ protected:
 	wstring m_strTheString;
 	//{{AFX_MSG(CChildView)
 	afx_msg void OnPaint();
-	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnFontPrev();
 	afx_msg void OnUpdateFontPrev(CCmdUI* pCmdUI);
@@ -63,7 +62,6 @@ protected:
 	afx_msg void OnMenuInputstring();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
-	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
 	afx_msg void OnMButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnEditCopy();
 	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
