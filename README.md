@@ -1,8 +1,8 @@
 ```
 【 ソフト名 】larmoji
 【  作者名  】TrueFF（ambiesoft.trueff@gmail.com）
-【 動作環境 】Windows XP以降
-【 必要DLL  】Visual Studio 2013 再配布パッケージ
+【 動作環境 】Windows 7以降
+【 必要DLL  】Visual Studio 2019 再配布パッケージ
 【 取扱種別 】フリーウエア
 【転載・配布】可
 ```
