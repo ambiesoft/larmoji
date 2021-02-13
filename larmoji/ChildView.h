@@ -55,10 +55,10 @@ protected:
 	//{{AFX_MSG(CChildView)
 	afx_msg void OnPaint();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnFontPrev();
-	afx_msg void OnUpdateFontPrev(CCmdUI* pCmdUI);
-	afx_msg void OnFontNext();
-	afx_msg void OnUpdateFontNext(CCmdUI* pCmdUI);
+	afx_msg void OnLetterPrev();
+	afx_msg void OnUpdateLetterPrev(CCmdUI* pCmdUI);
+	afx_msg void OnLetterNext();
+	afx_msg void OnUpdateLetterNext(CCmdUI* pCmdUI);
 	afx_msg void OnMenuInputstring();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);

@@ -63,6 +63,9 @@
     <ClCompile Include="..\..\lsMisc\stdosd\stdosd_win.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="COptionDialog.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChildView.h">
@@ -108,6 +111,9 @@
       <Filter>01 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lsMisc\stdosd\stdosd_literal.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="COptionDialog.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

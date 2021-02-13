@@ -28,10 +28,10 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	//{{AFX_MSG_MAP(CChildView)
 	ON_WM_PAINT()
 	ON_WM_CREATE()
-	ON_COMMAND(IDM_FONT_PREV, OnFontPrev)
-	ON_UPDATE_COMMAND_UI(IDM_FONT_PREV, OnUpdateFontPrev)
-	ON_COMMAND(IDM_FONT_NEXT, OnFontNext)
-	ON_UPDATE_COMMAND_UI(IDM_FONT_NEXT, OnUpdateFontNext)
+	ON_COMMAND(IDM_FONT_PREV, OnLetterPrev)
+	ON_UPDATE_COMMAND_UI(IDM_FONT_PREV, OnUpdateLetterPrev)
+	ON_COMMAND(IDM_FONT_NEXT, OnLetterNext)
+	ON_UPDATE_COMMAND_UI(IDM_FONT_NEXT, OnUpdateLetterNext)
 	ON_COMMAND(IDM_MENU_INPUTSTRING, OnMenuInputstring)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_RBUTTONDOWN()
@@ -59,7 +59,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
-	CString curFontName = ((CMainFrame*)theApp.m_pMainWnd)->GetCurFontName();
+	CString curFontName = MF_->GetCurFontName();
 	if (curFontName.IsEmpty())
 		return;
 
@@ -89,10 +89,10 @@ void CChildView::OnPaint()
 	lf.lfWidth = 0;
 
 
-	if( ((CMainFrame*)theApp.m_pMainWnd)->IsBold() )
+	if (MF_->IsBold())
 		lf.lfWeight = FW_BOLD;
 
-	if( ((CMainFrame*)theApp.m_pMainWnd)->IsItalic() )
+	if (MF_->IsItalic())
 		lf.lfItalic = TRUE;
 
 	lf.lfCharSet = 0;
@@ -166,7 +166,7 @@ CString CChildView::GetCodeString()
 	return strRet;
 }
 
-void CChildView::OnFontPrev() 
+void CChildView::OnLetterPrev() 
 {
 	if( m_strTheString.length() <= m_nCurIndex )
 		return;
@@ -182,15 +182,14 @@ void CChildView::OnFontPrev()
 	}
 
 	InvalidateRect(NULL);
-	
 }
 
-void CChildView::OnUpdateFontPrev(CCmdUI* pCmdUI) 
+void CChildView::OnUpdateLetterPrev(CCmdUI* pCmdUI) 
 {
 	pCmdUI->Enable(m_nCurIndex != 0);
 }
 
-void CChildView::OnFontNext() 
+void CChildView::OnLetterNext() 
 {
 	if( m_strTheString.length() <= (m_nCurIndex+1) )
 		return;
@@ -213,7 +212,7 @@ void CChildView::OnFontNext()
 	InvalidateRect(NULL);
 }
 
-void CChildView::OnUpdateFontNext(CCmdUI* pCmdUI) 
+void CChildView::OnUpdateLetterNext(CCmdUI* pCmdUI) 
 {
 	if( m_strTheString.length()==0 )
 	{
@@ -249,13 +248,17 @@ void CChildView::OnMenuInputstring()
 
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point) 
 {
-	OnFontNext();
+	if (MF_->IsMoveByClick())
+		OnLetterNext();
+	
 	CWnd::OnLButtonDown(nFlags, point);
 }
 
 void CChildView::OnRButtonDown(UINT nFlags, CPoint point) 
 {
-	OnFontPrev();
+	if(MF_->IsMoveByClick())
+		OnLetterPrev();
+
 	CWnd::OnRButtonDown(nFlags, point);
 }
 
@@ -311,10 +314,13 @@ void CChildView::OnUpdateEditCopy(CCmdUI* pCmdUI)
 
 BOOL CChildView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
-	if (zDelta < 0)
-		OnFontNext();
-	else
-		OnFontPrev();
+	if (MF_->IsMoveByWheel())
+	{
+		if (zDelta < 0)
+			OnLetterNext();
+		else
+			OnLetterPrev();
+	}
 
 	return CWnd::OnMouseWheel(nFlags, zDelta, pt);
 }

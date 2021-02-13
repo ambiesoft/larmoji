@@ -250,6 +250,7 @@
     <ClCompile Include="..\..\lsMisc\UrlEncode.cpp" />
     <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="COptionDialog.cpp" />
     <ClCompile Include="FontNameComboBox.cpp" />
     <ClCompile Include="InputDialog.cpp" />
     <ClCompile Include="larmoji.cpp" />
@@ -278,6 +279,7 @@
     <ClInclude Include="..\..\lsMisc\UrlEncode.h" />
     <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h" />
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="COptionDialog.h" />
     <ClInclude Include="FontNameComboBox.h" />
     <ClInclude Include="InputDialog.h" />
     <ClInclude Include="larmoji.h" />

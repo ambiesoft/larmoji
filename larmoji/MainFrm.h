@@ -12,6 +12,7 @@
 #include "strings.h"
 #include "ChildView.h"
 #include "MainToolBar.h"
+#include "COptionDialog.h"
 
 class CMainFrame : public CFrameWnd
 {
@@ -20,8 +21,6 @@ public:
 	CMainFrame();
 protected: 
 	DECLARE_DYNAMIC(CMainFrame)
-
-public:
 
 
 public:
@@ -49,6 +48,7 @@ public:
 protected:
 	CStatusBar m_wndStatusBar;
 	CMainToolBar m_wndToolBar;
+	COptionDialog m_options;
 
 public:
 	CChildView    m_wndView;
@@ -84,7 +84,18 @@ protected:
 	afx_msg void OnUpdateIndex(CCmdUI* pCmdUI);
 	afx_msg BOOL OnToolTipText(UINT nID, NMHDR* pNMHDR, LRESULT* pResult);
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnToolsOptions();
+
+	BOOL IsMoveByClick() const {
+		return m_options.m_bMoveByClick;
+	}
+	BOOL IsMoveByWheel() const {
+		return m_options.m_bMoveByWheel;
+	}
 };
+
+#define MF_ ((CMainFrame*)theApp.m_pMainWnd)
 
 /////////////////////////////////////////////////////////////////////////////
 

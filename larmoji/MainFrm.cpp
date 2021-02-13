@@ -4,7 +4,7 @@
 #include "stdafx.h"
 
 #include "larmoji.h"
-
+#include "COptionDialog.h"
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_INDICATOR_INDEX, OnUpdateIndex)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTW, 0, 0xFFFF, OnToolTipText)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTA, 0, 0xFFFF, OnToolTipText)
+	ON_COMMAND(ID_TOOLS_OPTIONS, &CMainFrame::OnToolsOptions)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -55,7 +56,8 @@ static UINT indicators[] =
 };
 
 
-CMainFrame::CMainFrame()
+CMainFrame::CMainFrame() :
+	m_options(theApp.GetIniPath())
 {
 	m_nFlags = (UINT)theApp.GetProfileInt(STR_SECTION_SETTING, STR_SECKEY_FLAGS, 0);
 	m_hNextWnd = NULL;
@@ -503,3 +505,10 @@ void CMainFrame::OnUpdateFontItalic(CCmdUI* pCmdUI)
 	pCmdUI->SetCheck( (m_nFlags & APPFLAGS_ITALIC) ? 1 : 0 );
 }
 
+
+
+void CMainFrame::OnToolsOptions()
+{
+
+	m_options.DoModal();
+}

@@ -19,7 +19,7 @@
 
 #include <afxpriv.h>    // for WM_SETMESSAGESTRING
 #include <afxole.h>
-
+#include <afxdialogex.h>
 #include <string>
 #include <set>
 using namespace std;
@@ -27,6 +27,7 @@ using namespace std;
 // Microsoft Visual C++
 
 #include "../../lsMisc/I18N.h"
+
 using namespace Ambiesoft;
 
 #endif // !defined(AFX_STDAFX_H__D5783068_745A_11D5_8E03_A40A1FE48159__INCLUDED_)

@@ -36,6 +36,9 @@ public:
 	afx_msg void OnFileNew();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+public:
+	LPCWSTR GetIniPath() const;
 };
 
 extern CLarmojiApp theApp;

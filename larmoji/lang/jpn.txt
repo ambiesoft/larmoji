@@ -40,3 +40,10 @@
 "OK"="OK"
 
 "Choose Font"="フォントを選択"
+"&Options..."="オプション(&O)..."
+"&Tools"="ツール(&T)"
+
+"By &Click"="マウスクリック(&C)"
+"By &Wheel"="マウスホイール(&W)"
+"Character Move"="文字の移動"
+"Options"="オプション"

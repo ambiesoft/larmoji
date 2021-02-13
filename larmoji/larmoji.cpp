@@ -38,6 +38,17 @@ CLarmojiApp theApp;
 
 BOOL CLarmojiApp::InitInstance()
 {
+	{
+		TCHAR szProfileName[MAX_PATH] = { _T('\0') };
+		VERIFY(GetModuleFileName(NULL, szProfileName, sizeof(szProfileName)));
+		LPTSTR lpszExt = _tcsrchr(szProfileName, '.');
+		ASSERT(lpszExt);
+		*lpszExt = _T('\0');
+		lstrcat(szProfileName, _T(".ini"));
+		free((void*)m_pszProfileName);
+		m_pszProfileName = _tcsdup(szProfileName);
+	}
+
 	CCommandLineParser parser;
 	wstring lang;
 	parser.AddOption(L"-lang", 1, &lang);
@@ -72,16 +83,6 @@ BOOL CLarmojiApp::InitInstance()
 	if( !AfxOleInit() )
 		return FALSE;
 
-	{
-		TCHAR szProfileName[MAX_PATH] = { _T('\0') };
-		VERIFY(GetModuleFileName(NULL, szProfileName, sizeof(szProfileName)));
-		LPTSTR lpszExt = _tcsrchr(szProfileName, '.');
-		ASSERT(lpszExt);
-		*lpszExt = _T('\0');
-		lstrcat(szProfileName, _T(".ini"));
-		free((void*)m_pszProfileName);
-		m_pszProfileName = _tcsdup(szProfileName);
-	}
 
 	CF_LARMOJIIGNORE = RegisterClipboardFormat(_T("CLIPBOARDFORMAT_LARMOJI_IGNORE"));
 
@@ -183,7 +184,10 @@ void CLarmojiApp::OnFileNew()
 }
 
 
-
+LPCWSTR CLarmojiApp::GetIniPath() const
+{
+	return m_pszProfileName;
+}
 
 BOOL CAboutDlg::OnInitDialog()
 {
