@@ -124,6 +124,9 @@
     <Image Include="res\Toolbar.bmp">
       <Filter>03 Resource Files</Filter>
     </Image>
+    <Image Include="res\mainfram.bmp">
+      <Filter>03 Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\larmoji.rc2">

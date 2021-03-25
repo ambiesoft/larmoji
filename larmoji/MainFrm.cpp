@@ -83,9 +83,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
+	UINT uIDR_MAINFRAME = IDR_MAINFRAME;
+	if (GetDpiForSystem() > 96)
+		uIDR_MAINFRAME = IDR_MAINFRAME_BIG;
+
 	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
 		| CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+		!m_wndToolBar.LoadToolBar(uIDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");
 		return -1;
@@ -95,34 +99,23 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	ASSERT(nWatchCBIndex != -1);
 	m_wndToolBar.SetButtonStyle(nWatchCBIndex, TBBS_CHECKBOX); 
 
-
-
-	#define SNAP_WIDTH 150 //the width of the combo box
 	CRect rect;
-	//set up the ComboBox control as a snap mode select box
-	//
-	//First get the index of the placeholder's position in the toolbar
-	int nFontNameIndex = 0;
-	while (m_wndToolBar.GetItemID(nFontNameIndex) != IDP_FONTNAME) 
-		nFontNameIndex++;
-
-	//next convert that button to a seperator and get its position
-	m_wndToolBar.SetButtonInfo(nFontNameIndex, IDP_FONTNAME, TBBS_SEPARATOR,
-		SNAP_WIDTH);
-	m_wndToolBar.GetItemRect(nFontNameIndex, &rect);
-
-	//expand the rectangle to allow the combo box room to drop down
-	//rect.top+=1;
-	rect.bottom += 200;
+	int nIndex = m_wndToolBar.GetToolBarCtrl().CommandToIndex(IDP_FONTNAME);
+	m_wndToolBar.SetButtonInfo(nIndex, IDP_FONTNAME, TBBS_SEPARATOR, 205);
+	m_wndToolBar.GetToolBarCtrl().GetItemRect(nIndex, &rect);
+	rect.top = 1;
+	rect.bottom = rect.top + 250 /*drop height*/;
 
 	// then .Create the combo box and show it
 	if (!m_wndToolBar.m_cmbFontName.Create(
 		WS_CHILD | WS_VISIBLE | CBS_AUTOHSCROLL | CBS_DROPDOWNLIST,
-		rect, &m_wndToolBar, IDC_FONTNAME_COMBO))
+		rect, &m_wndToolBar, IDP_FONTNAME))
 	{
 		TRACE0("Failed to create combo-box\n");
 		return FALSE;
 	}
+	if (GetDpiForSystem() > 96)
+		m_wndToolBar.m_cmbFontName.SetItemHeight(-1, 30);
 
 	if (!m_wndStatusBar.Create(this) ||
 		!m_wndStatusBar.SetIndicators(indicators,

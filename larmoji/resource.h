@@ -8,6 +8,8 @@
 #define ID_INDICATOR_MAIN               103
 #define IDR_MAINFRAME                   128
 #define IDR_LARMOJTYPE                  129
+#define IDR_MAINFRAME1                  129
+#define IDR_MAINFRAME_BIG               129
 #define IDD_DIALOG_INPUT                132
 #define IDD_DIALOG_OPTION               136
 #define IDC_EDIT_TEXT                   1000
