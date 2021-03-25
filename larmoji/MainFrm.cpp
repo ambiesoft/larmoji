@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 
+#include "../../lsMisc/HighDPI.h"
+
 #include "larmoji.h"
 #include "COptionDialog.h"
 #include "MainFrm.h"
@@ -67,6 +69,9 @@ CMainFrame::~CMainFrame()
 {
 }
 
+
+
+
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
@@ -84,7 +89,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 
 	UINT uIDR_MAINFRAME = IDR_MAINFRAME;
-	if (GetDpiForSystem() > 96)
+	if (GetDPIScale() > 96)
 		uIDR_MAINFRAME = IDR_MAINFRAME_BIG;
 
 	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
@@ -114,7 +119,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("Failed to create combo-box\n");
 		return FALSE;
 	}
-	if (GetDpiForSystem() > 96)
+	if (GetDPIScale() > 96)
 		m_wndToolBar.m_cmbFontName.SetItemHeight(-1, 30);
 
 	if (!m_wndStatusBar.Create(this) ||

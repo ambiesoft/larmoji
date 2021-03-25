@@ -3,6 +3,7 @@
 
 #include "../../lsMisc/CommandLineParser.h"
 #include "../../lsMisc/stdosd/stdosd.h"
+#include "../../lsMisc/HighDPI.h"
 
 #include "larmoji.h"
 
@@ -36,8 +37,12 @@ CLarmojiApp::CLarmojiApp()
 
 CLarmojiApp theApp;
 
+
+
 BOOL CLarmojiApp::InitInstance()
 {
+	InitHighDPISupport();
+
 	{
 		TCHAR szProfileName[MAX_PATH] = { _T('\0') };
 		VERIFY(GetModuleFileName(NULL, szProfileName, sizeof(szProfileName)));
