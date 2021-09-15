@@ -22,7 +22,7 @@
 	    	"../lsMisc",
 	    	"../distSolution"
 	    ],
-    	"outheader": "wcfind/gitrev.h",
+    	"outheader": "larmoji/gitrev.h",
     	"char": "wchar"
     },    
     "ShouldBeFiles": [
