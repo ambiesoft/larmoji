@@ -4,6 +4,9 @@
 #include "../../lsMisc/CommandLineParser.h"
 #include "../../lsMisc/stdosd/stdosd.h"
 #include "../../lsMisc/HighDPI.h"
+#include "../../lsMisc/GetVersionString.h"
+
+#include "gitrev.h"
 
 #include "larmoji.h"
 
@@ -151,12 +154,20 @@ protected:
 
 public:
 	virtual BOOL OnInitDialog();
+	CString m_strGitRev;
+	CString m_strAppVersion;
 };
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
+, m_strGitRev(_T(""))
+, m_strAppVersion(_T(""))
 {
 	//{{AFX_DATA_INIT(CAboutDlg)
 	//}}AFX_DATA_INIT
+
+	m_strAppVersion.Format(L"%s v%s", AfxGetAppName(), GetVersionString(NULL, 3).c_str());
+	m_strGitRev = stdStringReplace(GITREV::GetHashMessage(),
+		L"\n", L"\r\n").c_str();
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
@@ -164,6 +175,8 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAboutDlg)
 	//}}AFX_DATA_MAP
+	DDX_Text(pDX, IDC_EDIT_GITREV, m_strGitRev);
+	DDX_Text(pDX, IDC_STATIC_APPVERSION, m_strAppVersion);
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)

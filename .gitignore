@@ -5,4 +5,5 @@ Release/
 ipch/
 *.user
 *.aps
+larmoji/gitrev.h
 

@@ -4,6 +4,7 @@
 #include "stdafx.h"
 
 #include "../../lsMisc/HighDPI.h"
+#include "../../lsMisc/UrlEncode.h"
 
 #include "larmoji.h"
 #include "COptionDialog.h"
@@ -283,9 +284,15 @@ void CMainFrame::OnDestroy()
 	}
 
 	int nLastSel = m_wndToolBar.m_cmbFontName.GetCurSel();
-	if( nLastSel != CB_ERR )
+	if (nLastSel != CB_ERR)
+	{
+		CString strFontName;
+		m_wndToolBar.m_cmbFontName.GetLBText(nLastSel, strFontName);
+		VERIFY(!strFontName.IsEmpty());
+		theApp.WriteProfileString(STR_SECTION_SETTING, STR_FONTFACECOMBO_FONTNAME,
+			UrlEncodeStd(strFontName).c_str());
 		theApp.WriteProfileInt(STR_SECTION_SETTING, STR_FONTFACECOMBO_INDEX, nLastSel);
-	
+	}
 	CFrameWnd::OnDestroy();
 }
 
@@ -434,7 +441,18 @@ BOOL CMainFrame::InitCombobox()
 		m_wndToolBar.m_cmbFontName.InsertItem(&item);
 	}
 
-	int nLastSel = theApp.GetProfileInt(STR_SECTION_SETTING, STR_FONTFACECOMBO_INDEX, 0);
+	int nLastSel = -1;
+	CString strFontName = theApp.GetProfileString(STR_SECTION_SETTING, STR_FONTFACECOMBO_FONTNAME);
+	strFontName = UrlDecodeStd<wstring>(strFontName).c_str();
+	if(!strFontName.IsEmpty())
+		nLastSel = m_wndToolBar.m_cmbFontName.FindStringExact(0, strFontName);
+	
+	// old measure
+	if(nLastSel < 0)
+		nLastSel = theApp.GetProfileInt(STR_SECTION_SETTING, STR_FONTFACECOMBO_INDEX, 0);
+	
+	if (nLastSel < 0)
+		nLastSel = 0;
 	if( nLastSel > m_wndToolBar.m_cmbFontName.GetCount() )
 		nLastSel = 0;
 

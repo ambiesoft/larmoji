@@ -17,6 +17,8 @@
 #define IDC_CHECK_MOVEBYWHEEL           1002
 #define IDC_MFCLINK1                    1002
 #define IDC_MFCLINK_GOTOWEBPAGE         1002
+#define IDC_EDIT_GITREV                 1003
+#define IDC_STATIC_APPVERSION           1004
 #define IDM_WATCH_CLIPBOARD             32772
 #define IDM_WINDOW_ALWAYSTOP            32773
 #define IDP_FONTNAME                    32775
@@ -35,7 +37,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        139
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_CONTROL_VALUE         1005
 #define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif
