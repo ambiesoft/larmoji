@@ -109,7 +109,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	int nIndex = m_wndToolBar.GetToolBarCtrl().CommandToIndex(IDP_FONTNAME);
 	m_wndToolBar.SetButtonInfo(nIndex, IDP_FONTNAME, TBBS_SEPARATOR, 205);
 	m_wndToolBar.GetToolBarCtrl().GetItemRect(nIndex, &rect);
-	rect.top = 1;
+//	rect.top = 1;
 	rect.bottom = rect.top + 250 /*drop height*/;
 
 	// then .Create the combo box and show it
