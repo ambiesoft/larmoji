@@ -34,7 +34,6 @@ END_MESSAGE_MAP()
 
 CLarmojiApp::CLarmojiApp()
 {
-	m_bCopying = FALSE;
 }
 
 

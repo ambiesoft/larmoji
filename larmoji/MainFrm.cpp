@@ -5,6 +5,7 @@
 
 #include "../../lsMisc/HighDPI.h"
 #include "../../lsMisc/UrlEncode.h"
+#include "../../lsMisc/GetClipboardText.h"
 
 #include "larmoji.h"
 #include "COptionDialog.h"
@@ -319,7 +320,6 @@ void CMainFrame::OnEditPaste()
 
 	m_wndView.SetTheString( (LPCWSTR)GlobalLock(h) );
 	GlobalUnlock(h);
-
 }
 
 void CMainFrame::OnUpdateEditPaste(CCmdUI* pCmdUI) 
@@ -352,12 +352,23 @@ void CMainFrame::OnDrawClipboard()
 	
 	ASSERT(m_nFlags & APPFLAGS_WATCHCB);
 
-	if( !theApp.m_bCopying )
+	auto fnIsClipboardIsOneCharAndNotEqualWithCopying = [this]() {
+		wstring clip;
+		if (!GetClipboardText(m_hWnd, clip))
+			return false;
+		if (clip.size() != 1)
+			return false;
+		return clip[0] != theApp.m_cCopying;
+		};
+	if (theApp.m_cCopying == 0 || fnIsClipboardIsOneCharAndNotEqualWithCopying())
+	{
 		OnEditPaste();
+	}
 
 	if(m_hNextWnd)
 		::SendMessage(m_hNextWnd, WM_DRAWCLIPBOARD, 0, 0);
 
+	// Update the status bar
 	PostMessage(WM_SETMESSAGESTRING);
 }
 

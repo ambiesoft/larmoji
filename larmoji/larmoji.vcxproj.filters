@@ -72,6 +72,9 @@
     <ClCompile Include="..\..\lsMisc\GetVersionString.cpp">
       <Filter>02 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lsMisc\GetClipboardText.cpp">
+      <Filter>02 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChildView.h">
@@ -126,6 +129,9 @@
       <Filter>01 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lsMisc\GetVersionString.h">
+      <Filter>01 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\GetClipboardText.h">
       <Filter>01 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

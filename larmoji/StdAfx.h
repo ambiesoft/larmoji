@@ -30,4 +30,6 @@ using namespace std;
 
 using namespace Ambiesoft;
 
+#define WM_APP_CLEARCOPYING (WM_APP+1)
+
 #endif // !defined(AFX_STDAFX_H__D5783068_745A_11D5_8E03_A40A1FE48159__INCLUDED_)
