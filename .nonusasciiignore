@@ -1,0 +1,11 @@
+*.png
+*.ico
+*.rc2
+*.bmp
+
+README.md
+larmoji/history.txt
+larmoji/lang/jpn.txt
+larmoji/resource.h
+larmoji/larmoji.rc
+

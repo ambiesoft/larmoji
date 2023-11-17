@@ -1,7 +1,4 @@
-﻿// COptionDialog.cpp : 実装ファイル
-//
-
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include "larmoji.h"
 #include "COptionDialog.h"
 
@@ -33,9 +30,6 @@ void COptionDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(COptionDialog, CDialogEx)
 END_MESSAGE_MAP()
-
-
-// COptionDialog メッセージ ハンドラー
 
 
 void COptionDialog::PostNcDestroy()

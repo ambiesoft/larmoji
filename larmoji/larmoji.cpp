@@ -36,10 +36,7 @@ CLarmojiApp::CLarmojiApp()
 {
 }
 
-
 CLarmojiApp theApp;
-
-
 
 BOOL CLarmojiApp::InitInstance()
 {
@@ -89,7 +86,6 @@ BOOL CLarmojiApp::InitInstance()
 
 	if( !AfxOleInit() )
 		return FALSE;
-
 
 	CF_LARMOJIIGNORE = RegisterClipboardFormat(_T("CLIPBOARDFORMAT_LARMOJI_IGNORE"));
 

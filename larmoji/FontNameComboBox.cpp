@@ -1,6 +1,3 @@
-// FontNameComboBox.cpp : インプリメンテーション ファイル
-//
-
 #include "stdafx.h"
 #include "larmoji.h"
 #include "FontNameComboBox.h"

@@ -1,6 +1,3 @@
-// MainFrm.h : CMainFrame クラスの宣言およびインターフェイスの定義をします。
-//
-/////////////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_MAINFRM_H__D578306A_745A_11D5_8E03_A40A1FE48159__INCLUDED_)
 #define AFX_MAINFRM_H__D578306A_745A_11D5_8E03_A40A1FE48159__INCLUDED_
