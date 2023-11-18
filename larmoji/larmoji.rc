@@ -13,11 +13,59 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// ニュートラル (既定) resources
+// Japanese (Japan) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\larmoji.rc2""  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\\?[?X\r\n"
+    "#include ""l.jpn\\afxres.rc""          // ?W???I?R??g?|?[?l??g?g\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Japanese (Japan) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Default) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
 LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
-#pragma code_page(932)
+#pragma code_page(1252)
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -243,8 +291,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 4,0,1,0
- PRODUCTVERSION 4,0,1,0
+ FILEVERSION 4,0,2,0
+ PRODUCTVERSION 4,0,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -261,12 +309,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Ambiesoft"
             VALUE "FileDescription", "larmoji MFC Application"
-            VALUE "FileVersion", "4.0.1.0"
+            VALUE "FileVersion", "4.0.2.0"
             VALUE "InternalName", "larmoji"
             VALUE "LegalCopyright", "Copyright (C) 2020"
             VALUE "OriginalFilename", "larmoji.EXE"
             VALUE "ProductName", "larmoji Application"
-            VALUE "ProductVersion", "4.0.1.0"
+            VALUE "ProductVersion", "4.0.2.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -387,55 +435,7 @@ BEGIN
     ID_FILE_NEW             "Open New Window\nNew Window"
 END
 
-#endif    // ニュートラル (既定) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// 日本語 (日本) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
-LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
-#pragma code_page(932)
-
-#ifdef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// TEXTINCLUDE
-//
-
-1 TEXTINCLUDE 
-BEGIN
-    "resource.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
-    "#include ""afxres.h""\r\n"
-    "\0"
-END
-
-3 TEXTINCLUDE 
-BEGIN
-    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
-    "#define _AFX_NO_OLE_RESOURCES\r\n"
-    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
-    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
-    "\r\n"
-    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
-    "#ifdef _WIN32\r\n"
-    "LANGUAGE 17, 1\r\n"
-    "#pragma code_page(932)\r\n"
-    "#endif //_WIN32\r\n"
-    "#include ""res\\larmoji.rc2""  // Microsoft Visual C++ ?E?O?I?c?[???A?O?W?3?e?????\\?[?X\r\n"
-    "#include ""l.jpn\\afxres.rc""          // ?W???I?R??g?|?[?l??g?g\r\n"
-    "#endif\r\n"
-    "\0"
-END
-
-#endif    // APSTUDIO_INVOKED
-
-#endif    // 日本語 (日本) resources
+#endif    // Neutral (Default) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

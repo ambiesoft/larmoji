@@ -313,7 +313,7 @@ void CChildView::OnEditCopy()
 }
 LRESULT CChildView::OnClearCopying(WPARAM, LPARAM)
 {
-	theApp.m_cCopying = 0;
+//	theApp.m_cCopying = 0;
 	return 0;
 }
 void CChildView::OnUpdateEditCopy(CCmdUI* pCmdUI) 
