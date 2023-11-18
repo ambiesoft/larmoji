@@ -20,7 +20,6 @@ class CLarmojiApp : public CWinApp
 {
 public:
 	CLarmojiApp();
-	TCHAR m_cCopying = 0;
 	UINT CF_LARMOJIIGNORE;
 
 	//{{AFX_VIRTUAL(CLarmojiApp)

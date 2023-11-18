@@ -40,7 +40,6 @@ BEGIN_MESSAGE_MAP(CChildView,CWnd )
 	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
 	//}}AFX_MSG_MAP
 	ON_WM_MOUSEWHEEL()
-	ON_MESSAGE(WM_APP_CLEARCOPYING, OnClearCopying)
 END_MESSAGE_MAP()
 
 
@@ -293,14 +292,8 @@ void CChildView::OnEditCopy()
 			SetClipboardData(theApp.CF_LARMOJIIGNORE, h2);
 			SetClipboardData(CF_UNICODETEXT,h);
 		}
-		theApp.m_cCopying = c;
 		CloseClipboard();
 
-		// TODO: Clear m_cCopying
-		// but OnClearCopying can be called before second OnDraw() call
-		// I dont know why OnDraw() called twice.
-		// If this method does not work. we may have to use timer to clear m_cCopying
-		PostMessage(WM_APP_CLEARCOPYING);
 		GlobalUnlock(h);
 		GlobalUnlock(h2);
 
@@ -311,11 +304,7 @@ void CChildView::OnEditCopy()
 		GlobalFree(h2);
 	}
 }
-LRESULT CChildView::OnClearCopying(WPARAM, LPARAM)
-{
-//	theApp.m_cCopying = 0;
-	return 0;
-}
+
 void CChildView::OnUpdateEditCopy(CCmdUI* pCmdUI) 
 {
 	pCmdUI->Enable(m_strTheString.length() != 0);

@@ -352,15 +352,7 @@ void CMainFrame::OnDrawClipboard()
 	
 	ASSERT(m_nFlags & APPFLAGS_WATCHCB);
 
-	auto fnIsClipboardIsOneCharAndNotEqualWithCopying = [this]() {
-		wstring clip;
-		if (!GetClipboardText(m_hWnd, clip))
-			return false;
-		if (clip.size() != 1)
-			return false;
-		return clip[0] != theApp.m_cCopying;
-		};
-	if (theApp.m_cCopying == 0 || fnIsClipboardIsOneCharAndNotEqualWithCopying())
+	if (::GetActiveWindow() != m_hWnd)
 	{
 		OnEditPaste();
 	}
