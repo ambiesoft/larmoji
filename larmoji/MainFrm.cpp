@@ -79,6 +79,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
+	const bool bBigToolbar = (GetDPIScale() > 96);
+
 	HICON hIcon = LoadIcon(theApp.m_hInstance, MAKEINTRESOURCE(IDR_MAINFRAME));
 	SetIcon(hIcon, TRUE);
 	SetIcon(hIcon, FALSE);
@@ -90,9 +92,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
-	UINT uIDR_MAINFRAME = IDR_MAINFRAME;
-	if (GetDPIScale() > 96)
-		uIDR_MAINFRAME = IDR_MAINFRAME_BIG;
+	const UINT uIDR_MAINFRAME = bBigToolbar ? IDR_MAINFRAME_BIG : IDR_MAINFRAME;
 
 	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
 		| CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
@@ -121,7 +121,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("Failed to create combo-box\n");
 		return FALSE;
 	}
-	if (GetDPIScale() > 96)
+	if (bBigToolbar)
 		m_wndToolBar.m_cmbFontName.SetItemHeight(-1, 30);
 
 	if (!m_wndStatusBar.Create(this) ||
